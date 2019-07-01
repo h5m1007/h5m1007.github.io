@@ -9,7 +9,7 @@ tags: react
 1. module exports export import
 由于nodejs采用CommonJS模块规范，其中module表示一个对象变量，本身的exports属性是对外接口。因node为每个模块提供一个exports变量，所以有两种模块导出方式：`module.exports = { obj }` 和 `exports.obj = { obj }`；
 而ES6的export和export default，导出对外接口以提供给import导入，需要注意的是：
-```
+```javascript
 // export-index.js
 export const var = 1;
 
@@ -18,7 +18,7 @@ import { var } from ‘export-index’;
 ```
 由export直接导出的，import导入必须是对象且需知变量名
 
-```
+```javascript
 // export-index.js
 const var = 1;
 export default var;
@@ -29,9 +29,8 @@ import _var from ‘export-index’;
 而由export default导出的，import导入可以是自定义变量名
 
 
-
 ## class A extends B {}
-```
+```javascript
 class A extends B {
 	constructor(params) {
 		/*
@@ -39,6 +38,49 @@ class A extends B {
 			但super内部的this指向A
 		*/
 		super(params); // B.prototype.constructor.call(this, params)
+	}
+}
+```
+
+## 组件间的引用
+
+当子组件调用父组件函数时，
+
+```javascript
+
+// Parent
+import Child from './child.jsx';
+
+class Parent extends React.Component {
+	constructor(props) {
+		super(props);
+
+		this.state = {}
+	}
+
+	handleFn = () => {
+		// 这里使用箭头函数，当子组件调用时
+		// 可以获得当前作用域的this
+		this.setState({});
+	}
+
+	render() {
+		return <Child handleFn={handleFn} />
+	}
+}
+
+// Child
+export default class Child extends React.Component {
+	constructor(props) {
+		super(props);
+	}
+
+	render() {
+		const { handleFn } = this.props;
+
+		return (
+			<div onClick={ () => handleFn() } />
+		);
 	}
 }
 ```
@@ -126,3 +168,5 @@ export default function() {
 }
 
 ```
+
+
