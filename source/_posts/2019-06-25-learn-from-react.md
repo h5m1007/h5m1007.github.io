@@ -95,10 +95,11 @@ export default class Child extends React.Component {
 注释1 
 注释2 
 */ 
-ps：切记不能用<!-- 注释 -->
+ps：切记不能用 `<!-- 注释 -->`
 
 ## react 生命周期
 
+```javascript
 constructor(props) { 
 	// 只调用一次
 	super(props); // 必须存在 
@@ -139,6 +140,8 @@ componentWillUnmount() {
 	// 组件被移除前调用
 } // 组件卸载
 
+```
+
 * 在render阶段，只能经 this.prop 和 this.state 访问数据，不能改变状态，不能修改DOM输出
 
 ## react 指定位置render
@@ -169,4 +172,36 @@ export default function() {
 
 ```
 
+# 性能篇
+1. 使用 pureComponent
+内部处理的是浅比较，应用于业务场景，数据变化不复杂的情况
 
+2. defaultProps 初始化组件属性值
+引入 ``, 避免组件重复渲染
+
+3. 展示组件 / 容器组件
+抽离业务逻辑至容器组件，纯 UI 层面放置展示组件
+
+```javascript
+import Layout from './Layout'; // 展示组件
+
+export default class LayoutContainer extends React.Component {
+	// ...业务逻辑 fn
+	render() {
+		return <Layout />;
+	}
+}
+```
+
+导出接受展示组件的函数
+
+```javascript
+export default function(Component) {
+	return class Container extends React.Component {
+		render() {
+			return <Component />;
+		}
+	}
+}
+
+```

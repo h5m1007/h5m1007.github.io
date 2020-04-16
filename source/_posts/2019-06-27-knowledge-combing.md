@@ -63,3 +63,32 @@ for( let key in obj ) {
   console.log(`obj.${key} = ${obj[key]}`)
 }
 ```
+
+6. 退出循环
+
+序号 | 方法 | break | continue | return | return true | return false | 结论
+:-: | :-: | :-: | :-: | :-: | :-: | :-: | :-:
+1 | for循环 | 成功 | 跳出本次循环 | 不合法 | 不合法 | 不合法 | √
+2 | Array.forEach() | 不合法 | 不合法 | 跳出本次循环 | 跳出本次循环 | 跳出本次循环 | ×
+3 | for...in | 成功 | 跳出本次循环 | 不合法 | 不合法 | 不合法 | √
+4 | Array.map() | 不合法 | 不合法 | 跳出本次循环 | 跳出本次循环 | 跳出本次循环 | ×
+5 | Array.some() | 不合法 | 不合法 | 跳出本次循环 | 成功 | 跳出本次循环 | √
+6 | Array.every() | 不合法 | 不合法 | 成功 | 跳出本次循环 | 成功 | √
+7 | Array.filter() | 不合法 | 不合法 | 跳出本次循环 | 跳出本次循环 | 跳出本次循环 | ×
+
+
+## Array.reduce()
+
+对数组的每一项升序执行
+
+```javascript
+
+[1, 2, 3].reduce( (accumulator, currentValue, currentIndex, array) => {
+  // accumulator 累计器，默认起始值为initialValue
+  // currentValue 当前值
+  // currentIndex 当前值下标
+  // array调用reduce的数组
+  // initialValue accumulator默认起始值，当没指定时则以数组第一项为准
+}, initialValue ) 
+
+```
