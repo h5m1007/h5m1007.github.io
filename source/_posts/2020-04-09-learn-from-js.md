@@ -172,4 +172,6 @@ function checkImgs() {
 
 window.addEventListener('scroll', checkImgs, false);
 window.onload = checkImgs;
+
+// IntersectionObserver
 ```

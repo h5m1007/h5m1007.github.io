@@ -80,6 +80,6 @@ theme: apollo
 deploy:
   type: git
   repo: git@github.com:h5m1007/h5m1007.github.io.git
-  name: leon
-  email: 355795973@qq.com
+  # name: leon
+  # email: 355795973@qq.com
   branch: master
