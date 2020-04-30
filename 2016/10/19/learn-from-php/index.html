@@ -1,0 +1,35 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> PHP & MySQL 全记录一 · Leooon Blog</title><meta name="description" content="PHP &amp; MySQL 全记录一 - Leon"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://yoursite.com/atom.xml" title="Leooon Blog"><meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Leooon Blog" type="application/atom+xml">
+</head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/sunchongsheng" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/pinggod" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">PHP & MySQL 全记录一</h1><div class="post-info">Oct 19, 2016</div><div class="post-content"><p>游走于服务器端的语言 PHP</p>
+<h2 id="什么是PHP"><a href="#什么是PHP" class="headerlink" title="什么是PHP"></a>什么是PHP</h2><p>在我看来，PHP作为一种动态脚本弱语言，它集百家之长，融合C、java等语言的特点，很好地与html结合，以一种在服务器端执行的嵌入HTML文档的脚本语言</p>
+<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><p><code>&lt;?php code ?&gt;</code> 以<code>&lt;?</code>为开始，以<code>?&gt;</code>为结束，连接操作符(.)可连接纯字符串，或字符串和变量  </p>
+<h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><p>变量以($)符号开始  </p>
+<h4 id="超级变量"><a href="#超级变量" class="headerlink" title="超级变量"></a>超级变量</h4><p>超级全局变量可在任何地方使用和可见，包括内部和外部函数</p>
+<ul>
+<li><p><code>$_POST</code><br>当表单通过POST方法提交时，它是一个存储表单变量细节的数组<code>$_POST[name]</code></p>
+</li>
+<li><p><code>$_GET</code><br>当表单通过GET方法提交时，它是一个存储表单变量细节的数组<code>$_GET[name]</code></p>
+</li>
+<li><p><code>$_REQUEST</code><br>可获取无论是POST或GET方法提交的数据，都可由它的数组获得<code>$_REQUEST[name]</code></p>
+</li>
+</ul>
+<h3 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h3><p><code>define(&#39;NAME&#39;, value)</code>  保存常量，全局可见且值固定<br>形式如向define函数传入两参数，一是常量名(大写)，二是常量值<br>值得注意的是，引用一个常量无须($)符号来引用，只要直接使用其常量名称即可<br>而常量只可以保存布尔值、整数、浮点数、字符串的数据</p>
+<h3 id="操作符"><a href="#操作符" class="headerlink" title="操作符"></a>操作符</h3><ul>
+<li><p>引用操作符<br>(&amp;)  符号为引用操作符，用来关联赋值。如在变量a赋值给变量b时，会先产生原变量a的一个<strong>副本</strong><br><code>$a = 5; $b = $a;</code>，改变变量a的值时，b变量不受影响，因b变量依旧是副本a的旧值<br>但<code>$b = &amp;$a;</code>后，变量a值的改变将会影响b变量<br>所以，引用如一个别名，而不是一个指针  </p>
+</li>
+<li><p>错误抑制操作符<br>(@)  符号为错误抑制操作符，如<code>$a = @(57/0)</code>，这将会抑制一个整数除0的警告，全局变量<code>$php_errormsg</code>会保存这些错误信息  </p>
+</li>
+</ul>
+<h3 id="可变函数"><a href="#可变函数" class="headerlink" title="可变函数"></a>可变函数</h3><p>what?! 可变函数绝大一部分用来测试函数类型  </p>
+<ul>
+<li><p>gettype(变量)<br>该函数返回指定变量类型</p>
+</li>
+<li><p>settype(变量, 类型)<br>该函数设置指定变量的类型</p>
+</li>
+<li><p><code>is_array()</code>、<code>is_int()</code>、<code>is_bool()</code>…<br>以上类似的函数都是用来检测某变量是否该类型，返回true或false  </p>
+</li>
+<li><p>isset() &amp; unset()<br>isset()用来测试变量状态，即存在内存与否，接受由(,)间隔的变量列表<br>unset()用来销毁一个变量，在内存删除  </p>
+</li>
+<li><p>empty()<br>类似isset()，但不同的是它还会检测变量的值是否为非空和非0  </p>
+</li>
+</ul>
+</div></article></div></main><footer><div class="paginator"><a href="/2016/10/19/learn-from-nodejs/" class="prev">上一篇</a><a href="/2016/10/16/learn-from-requireJs/" class="next">下一篇</a></div><div class="copyright"><p>© 2015 - 2020 <a href="http://yoursite.com">Leon</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>

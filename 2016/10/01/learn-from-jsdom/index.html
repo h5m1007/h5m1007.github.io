@@ -1,0 +1,62 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> JavaScript DOM编程艺术 学习笔记 · Leooon Blog</title><meta name="description" content="JavaScript DOM编程艺术 学习笔记 - Leon"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://yoursite.com/atom.xml" title="Leooon Blog"><meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Leooon Blog" type="application/atom+xml">
+</head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/sunchongsheng" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/pinggod" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">JavaScript DOM编程艺术 学习笔记</h1><div class="post-info">Oct 1, 2016</div><div class="post-content"><p>往前复习javascript基础，由《JavaScript DOM编程艺术》出发，入门必学，相信大家都看过，基础但又有些容易忽略忘记的点，这些在这本书都能体现出来</p>
+<h2 id="动态修改样式"><a href="#动态修改样式" class="headerlink" title="动态修改样式"></a>动态修改样式</h2><ul>
+<li><p>ele.style.backgroundColor = ‘red’ 等价于 ele{background-color: red;}<br>在js中设置样式，遇带连字符(-)的形式的都需转换为驼峰形<br>在DOM2样式规范中提供了setProperty()方法，则以上写法可写成ele.style.setProperty(‘background-color’, ‘red’)，但该方法IE不支持  </p>
+</li>
+<li><p>for(item in obj){ }  循环对象(键值对) 以键(属性名)为循环项  </p>
+</li>
+<li><p>获取元素样式(行内)  ele.style.property(wordWord)  </p>
+</li>
+<li><p>array.join(str)  以str分割array数组返回分割后的字符串  </p>
+</li>
+<li><p>document.styleSheets  返回包含样式表(以<link>、<style>或行内等形式引入的样式表)的数组  </p>
+</li>
+<li><p>DOM2规范下的document.styleSheets[i].cssRules 或 IE下的document.styleSheets[i].rules  来获取样式规则表(数组)</p>
+</li>
+<li><p>DOM2规范下的document.styleSheets[i].insertRule(selector, index) 或 IE下的document.styleSheets[i].addRule(selector, styles, index)  新增样式到样式表指定位置</p>
+</li>
+<li><p>移除节点  node.parentNode.removeChild(node)指定node的父节点来操作removeChild(node)  </p>
+</li>
+<li><p>获取嵌入行内或引用样式表的样式  </p>
+<p>DOM2规范下的document.defaultView.getComputedStyle(ele).getPropertyValue(property) 或 IE下的ele.currentStyle.property  </p>
+<p>因元素最终样式是综合各种规则计算出来的，<code>getComputedStyle(node, &#39;node伪元素&#39;)</code> 能得到最终计算出来的样式规则  </p>
+</li>
+</ul>
+<h2 id="动态添加标签"><a href="#动态添加标签" class="headerlink" title="动态添加标签"></a>动态添加标签</h2><p>document.write()方法 与 innerHTML属性的区别  </p>
+<ul>
+<li><p>document.write()的使用需在<code>&lt;body&gt;</code> 中添加 <code>&lt;script&gt;</code> 标签，在<code>&lt;script&gt;</code>中进行调用，innerHTML则反之，任何位置调用都行  </p>
+</li>
+<li><p>由DOM方法添加标记，能提供更为<strong>详细</strong>的<em>DOM结构</em>，包括每个父子节点，而innerHTML则只是把整个标签添加，不会有任何<strong>细节</strong>  </p>
+</li>
+<li><p>document.createElement(“ele”)  创建的标签只是文档碎片，此时并不属于DOM结构的任何一部分  </p>
+</li>
+</ul>
+<p>该注意的是，document.createElement()只会创建一次即每次创建一个新标签，所以，要添加列表<code>&lt;ul&gt;&lt;li&gt;&lt;/li&gt; ...&lt;/ul&gt;</code>时，需要把document.createElement()的声明<strong>放进循环</strong>中</p>
+<h2 id="Ajax"><a href="#Ajax" class="headerlink" title="Ajax"></a>Ajax</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var request &#x3D; new XMLHttpRequest();</span><br><span class="line">request.open(&#39;GET&#39;, &#39;xxx.php&#39;, true);</span><br><span class="line">request.onreadystatechange &#x3D; function()&#123;</span><br><span class="line">    if(request.readyState &#x3D;&#x3D;&#x3D; 4 &amp;&amp; request.status &#x3D;&#x3D;&#x3D; 200)&#123;</span><br><span class="line">      &#x2F;&#x2F; 响应状态为4表示响应完成</span><br><span class="line">      alert(request.responseText); &#x2F;&#x2F; 取得服务器返回的文本数据</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">request.send();</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="animation动画"><a href="#animation动画" class="headerlink" title="animation动画"></a>animation动画</h2><p>实现每隔10毫秒移动1像素，起始位置(50, 100)，结束位置(200, 100)  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">function moveMsg()&#123;       </span><br><span class="line">    var elem &#x3D; document.getElementById(&#39;msg&#39;);</span><br><span class="line">    var posX &#x3D; parseInt(elem.style.left),</span><br><span class="line">    posY &#x3D; parseInt(elem.style.top);</span><br><span class="line">    if(posX &#x3D;&#x3D; 200 &amp;&amp; posY &#x3D;&#x3D; 100)&#123;</span><br><span class="line">        return true; &#x2F;&#x2F; 退出函数</span><br><span class="line">    &#125;</span><br><span class="line">    if(posX &lt; 200)&#123;</span><br><span class="line">        posX++;</span><br><span class="line">    &#125;else if(posX &gt; 200)&#123;</span><br><span class="line">        posX--;</span><br><span class="line">    &#125;</span><br><span class="line">    if(posY &lt; 100)&#123;</span><br><span class="line">        posY++;</span><br><span class="line">    &#125;else if(posY &gt; 100)&#123;</span><br><span class="line">        posY--;</span><br><span class="line">    &#125;</span><br><span class="line">    elem.style.left &#x3D; posX + &#39;px&#39;;</span><br><span class="line">    elem.style.top &#x3D; posY + &#39;px&#39;;</span><br><span class="line"></span><br><span class="line">    &lt;!-- 实现每隔10毫秒移动1像素 --&gt;</span><br><span class="line">    &lt;!-- 每隔10毫秒重复执行函数本身 --&gt;</span><br><span class="line">    movement &#x3D; setTimeout(moveMsg, 10);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function posMsg()&#123;</span><br><span class="line">    &lt;!-- 在起始位置调用移动函数moveMsg() --&gt;</span><br><span class="line">    var msg &#x3D; document.getElementById(&#39;msg&#39;);</span><br><span class="line">    msg.style.position &#x3D; &#39;absolute&#39;;</span><br><span class="line">    msg.style.left &#x3D; &#39;50px&#39;;</span><br><span class="line">    msg.style.top &#x3D; &#39;100px&#39;;</span><br><span class="line">    movement &#x3D; setTimeout(moveMsg, 2000); &#x2F;&#x2F; 未经var声明的标量为全局变量</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="定时器"><a href="#定时器" class="headerlink" title="定时器"></a>定时器</h2><ul>
+<li>setTimeout(func|code, delay)<br>该函数传入两参数，第一个参数是将要推迟执行的函数名或代码，第二个参数是推迟执行的<strong>毫秒数</strong>  </li>
+</ul>
+<p>值得注意的是：  </p>
+<ol>
+<li>推迟执行的代码必须以字符串形式，如<code>setTimeout(&quot;alert(&#39;for test!&#39;)&quot;, 1000)</code>  </li>
+<li>推迟执行的是<em>函数</em>时，可直接以函数名，如<code>setTimeout(func, 1000)</code>  </li>
+<li>1 但作为参数的func带有参数的话，那得用<code>匿名函数</code>包裹，如  </li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function func(arg1, arg2, ...)&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">setTimeout(function()&#123;</span><br><span class="line">    func(arg1, arg2, ...);</span><br><span class="line">&#125;, 1000);</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="iframe标签"><a href="#iframe标签" class="headerlink" title="iframe标签"></a>iframe标签</h2><p>iframe内联框架元素，用来在当前页面内嵌另一个HTML页面  </p>
+<p><code>&lt;iframe src=&quot;xxx.html&quot; name=&quot;frame&quot; id=&quot;frame&quot;&gt;&lt;/iframe&gt;</code>  </p>
+<p>当标签属性带有name时，可经<code>&lt;a&gt;</code>标签和<code>&lt;form&gt;</code>标签的target属性值做锚  </p>
+<p>在父窗口可由window.frames[“iframe窗体name或ID”]引用子窗口frame  </p>
+<p>子窗口可由window.parent访问父窗口  </p>
+<p>通过contentWindow属性即iframe.contentWindow，来访问iframe元素所包含的HTML页面的window对象，类似的可以<code>iframe.contentWindow.document</code>获取到document对象后，进行对DOM元素的访问  </p>
+<p>一切对iframe的访问操作，都需要等待iframe加载后才进行，即  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;iframe src&#x3D;&quot;xxx.html&quot; name&#x3D;&quot;frame&quot; id&#x3D;&quot;frame&quot;&gt;&lt;&#x2F;iframe&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var iframe &#x3D; document.getElementById(&quot;frame&quot;);</span><br><span class="line">    iframe.onload &#x3D; function()&#123;</span><br><span class="line">        var frameDoc &#x3D; iframe.contentWindow.document,</span><br><span class="line">            frameEle &#x3D; frameDoc.getElementById(element);</span><br><span class="line">    &#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+</div></article></div></main><footer><div class="paginator"><a href="/2016/10/01/compare-Less&amp;Sass/" class="prev">上一篇</a><a href="/2016/09/21/learn-from-css/" class="next">下一篇</a></div><div class="copyright"><p>© 2015 - 2020 <a href="http://yoursite.com">Leon</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>

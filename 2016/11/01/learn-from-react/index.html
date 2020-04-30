@@ -1,0 +1,67 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> react 回忆录一 · Leooon Blog</title><meta name="description" content="react 回忆录一 - Leon"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://yoursite.com/atom.xml" title="Leooon Blog"><meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Leooon Blog" type="application/atom+xml">
+</head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/sunchongsheng" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/pinggod" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">react 回忆录一</h1><div class="post-info">Nov 1, 2016</div><div class="post-content"><p>革命性创新 性能出众 代码逻辑灰常简单的 React</p>
+<h2 id="什么是React"><a href="#什么是React" class="headerlink" title="什么是React"></a>什么是React</h2><p>React 起源于Facebook的内部项目，项目本身也越滚越大，从最早的UI引擎变成了一整套前后端通吃的 Web App 解决方案</p>
+<h2 id="怎么玩"><a href="#怎么玩" class="headerlink" title="怎么玩"></a>怎么玩</h2><p>引入三大法宝： <code>react.js</code>、<code>react-dom.js</code>、<code>browser.js</code>  </p>
+<p><code>react.js</code> 是 React 的核心库<br><code>react-dom.js</code> 是提供与 DOM 相关的功能<br><code>browser.js</code> 的作用是将 JSX 语法转为 JavaScript 语法  </p>
+<ul>
+<li>JSX<br>允许 HTML 与 JavaScript 的混写，遇到 HTML 标签（以 &lt; 开头），就用 HTML 规则解析；遇到代码块（以 { 开头），就用 JavaScript 规则解析</li>
+</ul>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- ... --&gt;</span><br><span class="line">&lt;div id&#x3D;&quot;example&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">&lt;script type&#x3D;&quot;text&#x2F;babel&quot;&gt;</span><br><span class="line">    var names &#x3D; [&#39;Leon&#39;, &#39;Leo&#39;],</span><br><span class="line">        arr &#x3D; [</span><br><span class="line">            &lt;h1&gt;React is awesome&lt;&#x2F;h1&gt;,</span><br><span class="line">            &lt;h2&gt;good app!&lt;&#x2F;h2&gt;</span><br><span class="line">        ],</span><br><span class="line">        Msg &#x3D; React.createClass(&#123;</span><br><span class="line">            render: function()&#123;</span><br><span class="line">                return &lt;h1&gt;Hello, &#123;this.props.name&#125;&lt;&#x2F;h1&gt;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    ReactDOM.render(</span><br><span class="line">        &#x2F;&#x2F; &lt;h1&gt;Hello world!&lt;&#x2F;h1&gt;,</span><br><span class="line">        &#x2F;&#x2F; &lt;div&gt;</span><br><span class="line">        &#x2F;&#x2F;  &#123;</span><br><span class="line">        &#x2F;&#x2F;      names.map(function(name)&#123;</span><br><span class="line">        &#x2F;&#x2F;          return &lt;div&gt;Hello, &#123;name&#125;!&lt;&#x2F;div&gt;</span><br><span class="line">        &#x2F;&#x2F;      &#125;)</span><br><span class="line">        &#x2F;&#x2F;  &#125;</span><br><span class="line">        &#x2F;&#x2F; &lt;&#x2F;div&gt;,</span><br><span class="line">        &#x2F;&#x2F; &lt;div&gt;&#123;arr&#125;&lt;&#x2F;div&gt;,</span><br><span class="line">        &lt;Msg name&#x3D;&quot;Leon&quot;&#x2F;&gt;,</span><br><span class="line">        document.getElementById(&#39;example&#39;)</span><br><span class="line">    );</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>分析</p>
+</li>
+<li><p><code>ReactDOM.render(&quot;HTML&quot;, &quot;DOM&quot;)</code>  基本法，将模版转为HTML语言，并插入指定节点  </p>
+</li>
+<li><p><code>&lt;div&gt;{arr}&lt;/div&gt;</code>  变量是一个数组，结果 JSX 会把它的所有成员，添加到模板</p>
+</li>
+<li><p>组件</p>
+</li>
+</ul>
+<p><strong>组件</strong>并不是真实的 DOM 节点，而是存在于内存之中的一种数据结构，叫做<strong>虚拟 DOM</strong> （virtual DOM）。只有当它插入文档以后，才会变成真实的 DOM</p>
+<ul>
+<li>DOM diff 算法</li>
+</ul>
+<p>DOM的所有变动，都先在<strong>虚拟 DOM</strong> 上发生，然后再将实际发生变动的部分，反映在真实 DOM上，这种算法叫做 <strong>DOM diff</strong> ，它可以极大提高网页的性能表现</p>
+<ul>
+<li><p><code>React.createClass({})</code>  用于生成一个组件类，如 <code>Msg</code>，模板插入 <Msg /> 时，会自动生成 Msg 的一个实例  </p>
+</li>
+<li><p>组件注意事项： </p>
+</li>
+</ul>
+<p>组件类的第一个字母必须大写;<br>只能包含一个顶层标签;<br>组件的属性可以在组件类的 <code>this.props</code> 对象上获取;<br><code>class</code> 属性需要写成 <code>className</code> ，<code>for</code> 属性需要写成 <code>htmlFor</code>  </p>
+<ul>
+<li><p>组件参数</p>
+</li>
+<li><p>组件属性  </p>
+</li>
+</ul>
+<p><code>this.props</code> 表示那些一旦定义，就不再改变的特性  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    &#x2F;&#x2F; ...</span><br><span class="line">    Msg &#x3D; React.createClass(&#123;</span><br><span class="line">        &#x2F;&#x2F; 判断传入参数是否符合要求</span><br><span class="line">        propTypes: &#123;</span><br><span class="line">            &#x2F;&#x2F; 限制参数为字符串</span><br><span class="line">            title: React.PropTypes.string.isRequired</span><br><span class="line">        &#125;,</span><br><span class="line">        &#x2F;&#x2F; 设置属性默认值</span><br><span class="line">        getDefaultProps: function()&#123;</span><br><span class="line">            return &#123;</span><br><span class="line">                title: &quot;Hello Leon&quot;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        render: function()&#123;</span><br><span class="line">            return &lt;h1&gt;Hello, &#123;this.props.name&#125;&lt;&#x2F;h1&gt;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    &#x2F;&#x2F; ...</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>组件状态</li>
+</ul>
+<p>组件看成是一个<strong>状态机</strong>，一开始有一个初始状态，然后用户互动，导致状态变化，从而触发重新渲染 UI  </p>
+<p><code>this.state</code> 是会<em>随着用户互动而产生变化</em>的特性  </p>
+<p>所以，该属性一般在应用在表单比较多  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    &#x2F;&#x2F; ...</span><br><span class="line">    Slt_btn &#x3D; React.createClass(&#123;</span><br><span class="line">        &#x2F;&#x2F; 定义初始状态(对象)</span><br><span class="line">        getInitialState: function()&#123;</span><br><span class="line">            return &#123;</span><br><span class="line">                opt: false</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        clickSlt: function()&#123;</span><br><span class="line">            this.setState(&#123;</span><br><span class="line">                &#x2F;**</span><br><span class="line">                 * 修改状态值</span><br><span class="line">                 * 每次修改以后</span><br><span class="line">                 * 自动调用 this.render 方法再次渲染组件</span><br><span class="line">                 *&#x2F;</span><br><span class="line">                opt: !this.state.opt</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;,</span><br><span class="line">        render: function()&#123;</span><br><span class="line">            var text &#x3D; this.state.opt ? &quot;select&quot; : &quot;don&#39;t select&quot;;</span><br><span class="line">            return(</span><br><span class="line">                &lt;p onClick&#x3D;&#123;this.clickSlt&#125;&gt;</span><br><span class="line">                    You &#123;text&#125; this. Click to toggle!</span><br><span class="line">                &lt;&#x2F;p&gt;</span><br><span class="line">            )</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    &#x2F;&#x2F; ...</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>组件生命周期</li>
+</ul>
+<p>分别有：  </p>
+<ol>
+<li>Mounting：已插入真实 DOM</li>
+<li>Updating：正在被重新渲染</li>
+<li>Unmounting：已移出真实 DOM</li>
+</ol>
+<p>三种状态提供五种处理函数：  </p>
+<ol>
+<li><code>componentWillMount()</code>  组件<strong>载入之前</strong>调用</li>
+<li><code>componentDidMount()</code>  组件<strong>载入之后</strong>调用</li>
+<li><code>componentWillUpdate()</code>  组件<strong>更新之前</strong>调用</li>
+<li><code>componentDidUpdate()</code>  组件<strong>更新之后</strong>调用</li>
+<li><code>componentWillUnmount()</code>  组件<strong>卸载之前</strong>调用</li>
+</ol>
+</div></article></div></main><footer><div class="paginator"><a href="/2016/11/01/learn-from-nodejs/" class="prev">上一篇</a><a href="/2016/10/31/learn-from-nodejs/" class="next">下一篇</a></div><div class="copyright"><p>© 2015 - 2020 <a href="http://yoursite.com">Leon</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 对比Less和Sass · Leooon Blog</title><meta name="description" content="对比Less和Sass - Leon"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://yoursite.com/atom.xml" title="Leooon Blog"><meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Leooon Blog" type="application/atom+xml">
+</head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/sunchongsheng" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/pinggod" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">对比Less和Sass</h1><div class="post-info">Oct 1, 2016</div><div class="post-content"><p>强大的两款CSS预处理器：Less 和 Sass</p>
+<h2 id="Less与Sass的博弈"><a href="#Less与Sass的博弈" class="headerlink" title="Less与Sass的博弈"></a>Less与Sass的博弈</h2><p>在选择<strong>Less</strong>或者<strong>Sass</strong>时，可以考虑下自己的身份，是一名后端猿还是前端猿  </p>
+<p>Sass更适合后端猿，因它是基于<strong>Ruby</strong>在服务器端处理<br>Less适合前端猿，因它是基于Javascript，从而它需<em>额外的时间</em>来编译处理.less文件，再输出.css文件，供客户端使用  </p>
+<blockquote>
+<p>分别从8个方面对比Less和Sass</p>
+</blockquote>
+<ol>
+<li>混入(mixins) –&gt; class中的class</li>
+<li>参数混入 –&gt; 传参的class，类似于函数</li>
+<li>嵌套规则 –&gt; class嵌套class “DRY”</li>
+<li>运算 –&gt; css的数学</li>
+<li>颜色功能 –&gt; 编辑颜色</li>
+<li>命名空间 –&gt; 分组样式</li>
+<li>作用域 –&gt; 局部修改css</li>
+<li>js赋值 –&gt; css利用js赋值</li>
+</ol>
+<ul>
+<li>变量</li>
+</ul>
+<p>Less使用”@”来声明，如 <code>@color</code><br>Sass使用”$”来声明，如 <code>$color</code>  </p>
+<ul>
+<li>mixins</li>
+</ul>
+<p>Less用法  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">    .border &#123;</span><br><span class="line">        border-top: 1px dotted #333;</span><br><span class="line">    &#125;</span><br><span class="line">    article.post &#123;</span><br><span class="line">        background: #eee;</span><br><span class="line">        .border; &#x2F;*直接调用类名*&#x2F;</span><br><span class="line">    &#125;</span><br><span class="line">    ul.menu &#123;</span><br><span class="line">        background: #ccc;</span><br><span class="line">        .border;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;&#x2F;style&gt;</span><br></pre></td></tr></table></figure>
+
+<p>Sass用法  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">    @mixin border &#123;</span><br><span class="line">        &#x2F;*由@mixin声明*&#x2F;</span><br><span class="line">        border-top: 1px dotted #333;</span><br><span class="line">    &#125;</span><br><span class="line">    article.post &#123;</span><br><span class="line">        background: #eee;</span><br><span class="line">        @include border; &#x2F;*由@include调用*&#x2F;</span><br><span class="line">    &#125;</span><br><span class="line">    ul.menu &#123;</span><br><span class="line">        background: #ccc;</span><br><span class="line">        @include border;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;&#x2F;style&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>参数混入</li>
+</ul>
+<p>Less用法  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">    .border-radius(@radius: 3px) &#123;</span><br><span class="line">        -webkit-border-radius: @radius;</span><br><span class="line">        -moz-border-radius: @radius;</span><br><span class="line">        border-radius: @radius;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;&#x2F;style&gt;</span><br></pre></td></tr></table></figure>
+
+<p>Sass用法  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">    @mixin transform($value) &#123;</span><br><span class="line">      -webkit-transform: $value;</span><br><span class="line">      -moz-transform: $value;</span><br><span class="line">      transform: $value;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;&#x2F;style&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>选择器继承</li>
+</ul>
+<p>Less不提供</p>
+<p>Sass用法  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">    .menu&#123;</span><br><span class="line">        border: 1px solid #ddd;</span><br><span class="line">    &#125;</span><br><span class="line">    .footer&#123;</span><br><span class="line">        @extend .menu;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;&#x2F;style&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>嵌套规则</li>
+</ul>
+<p>Less与Sass类似用法  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">    #site-body &#123; …</span><br><span class="line">        .post &#123; …</span><br><span class="line">            .post-header &#123; …</span><br><span class="line">                h2 &#123; … &#125;</span><br><span class="line">                a &#123; …</span><br><span class="line">                    &amp;:visited &#123; … &#125;</span><br><span class="line">                    &amp;::hover &#123; … &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;&#x2F;style&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>运算<br>不常用<br>…占位</p>
+</li>
+<li><p>颜色函数</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">    @blue: #369;</span><br><span class="line">    .submit &#123;</span><br><span class="line">        padding: 5px 10px;</span><br><span class="line">        border: 1px solid @blue;</span><br><span class="line">        &#x2F;*...兼容方案...*&#x2F;</span><br><span class="line">        background: linear-gradient(top, lighten(@blue, 10%) 0%, @blue 100%); &#x2F;*W3C*&#x2F;</span><br><span class="line">        color: #fff;</span><br><span class="line">        text-shadow: 0 -1px 1px rgba(0,0,0,0.4);</span><br><span class="line">    &#125;</span><br><span class="line">&lt;&#x2F;style&gt;</span><br></pre></td></tr></table></figure>
+
+<p><em><code>lighten()</code> 函数用百分比值来减轻颜色</em>  </p>
+<p><strong>外传</strong> <code>linear-gradient()</code>  渐变属性  </p>
+<p><code>linear-gradient( [&lt;point&gt; || &lt;angle&gt;,]? &lt;stop&gt;, &lt;stop&gt; [, &lt;stop&gt;]* )</code>  </p>
+<p><img src="http://www.w3cplus.com/sites/default/files/moz-gradient.png?_=2882724" alt="线性渐变">  </p>
+<p>参数：其共有三个参数，第一个参数表示线性渐变的方向，top 是从上到下、left 是从左到右，如果定义成 left top，那就是从左上角到右下角。第二个和第三个参数分别是起点颜色和终点颜色  </p>
+<ul>
+<li>条件语句</li>
+</ul>
+<p>Less不支持  </p>
+<p>Sass用法  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">   @if $support-legacy &#123;</span><br><span class="line">      &#x2F;&#x2F; ...</span><br><span class="line">    &#125; @else &#123;</span><br><span class="line">      &#x2F;&#x2F; ...</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @for $i from 1 through 10 &#123;</span><br><span class="line">      .foo:nth-of-type(#&#123;$i&#125;) &#123;</span><br><span class="line">        border-color: hsl($i * 36, 50%, 50%);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;&#x2F;style&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>命名空间</li>
+</ul>
+<p>将一些公用的样式分组，然后在用的时候直接使用  </p>
+<p>Less用法  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">    #defaults &#123;</span><br><span class="line">        .nav_list () &#123; &#x2F;* 注意写法 () *&#x2F;</span><br><span class="line">            list-style: none;</span><br><span class="line">            margin: 0; padding: 0;</span><br><span class="line">        &#125;</span><br><span class="line">        &#x2F;*...*&#x2F;</span><br><span class="line">    &#125;</span><br><span class="line">    nav ul &#123;</span><br><span class="line">        #defaults &gt; .nav_list; &#x2F;* 注意调用方法 &gt; *&#x2F;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;&#x2F;style&gt;</span><br></pre></td></tr></table></figure>
+
+<p>Sass用法  </p>
+<p>CSS部分属性遵循同样的命名空间，如background-color、font-size、padding-top，等等，分别在各自的命名空间中，如background命名空间、font命名空间、padding命名空间  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">    .funky &#123;</span><br><span class="line">      font: &#123;</span><br><span class="line">        family: fantasy;</span><br><span class="line">        size: 30em;</span><br><span class="line">        weight: bold;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;*转译为CSS如下*&#x2F;</span><br><span class="line">    .funky &#123;</span><br><span class="line">      font-family: fantasy;</span><br><span class="line">      font-size: 30em;</span><br><span class="line">      font-weight: bold;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;&#x2F;style&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>作用域</li>
+</ul>
+<p>Less用法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">    @color: #00c; &#x2F;* 蓝色 *&#x2F;</span><br><span class="line">    #header &#123;</span><br><span class="line">        &#x2F;* 改变了变量color 只在#header作用域有效 *&#x2F;</span><br><span class="line">        @color: #c00; &#x2F;* red *&#x2F;</span><br><span class="line">        border: 1px solid @color; &#x2F;* 红色边框 *&#x2F;</span><br><span class="line">    &#125;</span><br><span class="line">    #footer &#123;</span><br><span class="line">        &#x2F;*变量依旧是原始值 #00c *&#x2F;</span><br><span class="line">        border: 1px solid @color; &#x2F;* 蓝色边框 *&#x2F;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;&#x2F;style&gt;</span><br></pre></td></tr></table></figure>
+
+<p>Sass用法  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">    $color: #00c; &#x2F;* 蓝色 *&#x2F;</span><br><span class="line">    #header &#123;</span><br><span class="line">        &#x2F;* 改变了变量color 在#header以后的作用域下都有效 *&#x2F;</span><br><span class="line">        $color: #c00; &#x2F;* red *&#x2F;</span><br><span class="line">        border: 1px solid $color; &#x2F;* 红色边框 *&#x2F;</span><br><span class="line">    &#125;</span><br><span class="line">    #footer &#123;</span><br><span class="line">        &#x2F;*变量继承#header作用域下的$color值#c00 *&#x2F;</span><br><span class="line">        border: 1px solid $color; &#x2F;* 红色边框 *&#x2F;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;&#x2F;style&gt;</span><br></pre></td></tr></table></figure>
+
+</div></article></div></main><footer><div class="paginator"><a href="/2016/10/08/learn-from-H5&amp;CSS3/" class="prev">上一篇</a><a href="/2016/10/01/learn-from-jsdom/" class="next">下一篇</a></div><div class="copyright"><p>© 2015 - 2020 <a href="http://yoursite.com">Leon</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>

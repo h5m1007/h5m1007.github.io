@@ -1,0 +1,69 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> javascript DOM高级程序设计 学习笔记 · Leooon Blog</title><meta name="description" content="javascript DOM高级程序设计 学习笔记 - Leon"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://yoursite.com/atom.xml" title="Leooon Blog"><meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Leooon Blog" type="application/atom+xml">
+</head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/sunchongsheng" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/pinggod" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">javascript DOM高级程序设计 学习笔记</h1><div class="post-info">Aug 30, 2016</div><div class="post-content"><p>css三本经典书籍之一，《精通CSS：高级Web标准解决方案》</p>
+<h2 id="html结构设计"><a href="#html结构设计" class="headerlink" title="html结构设计"></a>html结构设计</h2><ul>
+<li>元素名的设计<br>元素名即ID或类名的设计，尽可能保持名称与其表现方式无关，应根据该元素是<strong>用来干什么</strong>来为元素命名，而不是根据其的<em>外观如何</em>来命名，建议用<strong>连字符</strong>胜于驼峰写法，<code>andy-budd  andyBudd</code>  </li>
+</ul>
+<p>ID与类名的选择，应根据该元素是否在页面只会出现唯一的一次则使用ID，否则选择类名来命名那些相似的且可出现在多个位置的元素  </p>
+<p>“多类问题”：应简化结构，某部分内容整体应减少类名的出现，使用div标签来分组这部分内容并为其命名类名，分组内容避免使用类名  </p>
+<p>“多div问题”  应只在没有现有元素能够实现区域分割的情况下才使用div，根据<em>条目的意义或功能</em>用div来分组，一般div针对<em>块级元素</em>进行分组<br>同样，span标签可对<em>行内元素</em>进行分组或标识</p>
+<h2 id="属性选择器"><a href="#属性选择器" class="headerlink" title="属性选择器"></a>属性选择器</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">div[title&#x3D;&#39;box&#39;]&#123;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a[href]:hover, a[title].focus&#123;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a[rel~&#x3D;&#39;co-worker&#39;]&#123;</span><br><span class="line">  &lt;!-- 匹配条件为 --&gt;</span><br><span class="line">  &lt;!-- 有rel属性且值包含co-worker关键字的a标签 --&gt;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="样式"><a href="#样式" class="headerlink" title="样式"></a>样式</h2><ul>
+<li><p>盒模型的元素框总尺寸由内容区域、内外边距、边框的大小所构成，其中<strong>内容区域</strong>的宽高由width、height设置  </p>
+</li>
+<li><p>外边距叠加  相邻两个盒模型的外边距会叠加，最终的<em>外边距值</em>取两叠加值的最大值  </p>
+</li>
+<li><p>行内框  修改行内框尺寸唯一办法是修改其行高或<strong>水平</strong>边框、内外边距<br>可为行内元素设置 <code>display: inline-block;</code> 使行内元素依旧保持水平排列，但也能像块级元素一样设置宽高、垂直的内外边距  </p>
+</li>
+<li><p>清除浮动<br>当为元素设置浮动时，周边的元素可能会受其影响，如周边元素会<em>向浮动元素靠拢</em>，此时可对周边元素设置 <code>clear: both;</code> 来清除浮动元素对其的影响，而 <code>clear: both;</code> 实际上是对周边元素<strong>增加合适的外边距</strong>，使其远离浮动元素  </p>
+</li>
+</ul>
+<p>如下代码应用：  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">.new&#123;</span><br><span class="line">  background-color: gray;</span><br><span class="line">  border: 1px solid black;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.new img&#123;</span><br><span class="line">  float: left;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.new p&#123;</span><br><span class="line">  float: right;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.new .clearfloat&#123;</span><br><span class="line">  clear: both;</span><br><span class="line">&#125;</span><br><span class="line">&lt;!-- 第三种方案 --&gt;</span><br><span class="line">.clear:after&#123;</span><br><span class="line">  height: 0;</span><br><span class="line">  content: &#39;.&#39;;</span><br><span class="line">  display: block;</span><br><span class="line">  visibility: hidden;</span><br><span class="line">  clear: both;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;div class&#x3D;&quot;news clear&quot;&gt;</span><br><span class="line">  &lt;img src&#x3D;&quot;xxx.png&quot; alt&#x3D;&quot;my-pic&quot;&gt;</span><br><span class="line">  &lt;p&gt;Some text&lt;&#x2F;p&gt;</span><br><span class="line">  &lt;div class&#x3D;&quot;clearfloat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>上述代码会出现的问题时，.new父级的子级img和p元素都为浮动，脱离的文档流，.new将不能包围它们，解决方案有：  </p>
+<ol>
+<li>可在子级中在加入 <code>clear: both;</code> 的元素，即在html<em>额外**</em>添加空标签div**并添其样式 <code>clear: both;</code>  </li>
+<li>向父级添加 <code>overflow: hidden;</code> 或 <code>overflow: auto;</code> 样式，但会在某些情况下截断内容或产生滚动条  </li>
+<li>(兼容性高) 向父级增加类名，并为该类名添加伪元素 <code>:after</code> ，样式为：  </li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.clear:after&#123;</span><br><span class="line">  height: 0;</span><br><span class="line">  content: &#39;.&#39;;</span><br><span class="line">  display: block;</span><br><span class="line">  visibility: hidden;</span><br><span class="line">  clear: both;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>多背景<br>在CSS3下支持一个元素拥有多个背景，如：  </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.box&#123;</span><br><span class="line">      width: 20em;</span><br><span class="line">      background: url(xxx.gif) no-repeat top left,</span><br><span class="line">            url(xxx.gif) no-repeat top right,</span><br><span class="line">            url(.xxx.gif) no-repeat bottom left,</span><br><span class="line">            url(xxx.gif) no-repeat bottom right;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>border-image<br>border-image有六大属性值，分别是：  </li>
+</ul>
+<ol>
+<li>图片地址border-image-source，值为url(xxx.gif)  </li>
+<li>图片切片border-image-slice，值只允许数字及百分数，简写类似margin  </li>
+<li>图片宽度border-image-width，值类似border-width控制边框宽  </li>
+<li>图片外凸border-image-outset，值可影响边框距中间内容区域的距离  </li>
+<li>图片重复border-image-repeat，值有repeat、round、stretch  </li>
+</ol>
+<p>简写规则：border-image: 地址 剪裁 /边框宽/(离中间区域距离)可选 (拉伸)可选;  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.border-image&#123;</span><br><span class="line">  border-image: url(xxx.gif) 25% 25px&#x2F;25px round;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>不透明度  </li>
+</ul>
+<ol>
+<li>直接作用到元素  <code>opacity: .8</code>，<code>filter: alpha(opacity=80)</code> (兼容IE)  </li>
+<li>直接作用到元素背景  <code>background-color: rgba(0, 0, 0, .8);</code>，这里的0.8指不透明度，即20%透明度  </li>
+<li>使用PNG透明背景图像  <code>filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=&quot;xxx.png&quot;, sizingMethod=&quot;crop&quot;);</code> (兼容IE)  </li>
+</ol>
+<ul>
+<li><p>链接目标设样式<br>同一个页面中，由a标签跳转#id 如 <code>&lt;a href=&quot;#id&quot;&gt;&lt;/a&gt; &lt;div class=&quot;cont&quot; id=&quot;id&quot;&gt;&lt;/div&gt;</code>，点击a标签跳到#id标签的内容，可设 <code>.cont:target { background: red;}</code>，让每个不同id但相同类名的div标签作用样式  </p>
+</li>
+<li><p>slc[attr=val]<br>属性选择器，修改指定属性值val的某标签slc，如a[href=”http:”]<br>同样，slc[attr^=val]修改指定以属性值val开头的某标签slc<br>slc[attr$=val]修改指定以属性值val结尾的某标签slc</p>
+</li>
+<li></li>
+</ul>
+</div></article></div></main><footer><div class="paginator"><a href="/2016/08/30/install-apache/" class="prev">上一篇</a><a href="/2016/08/18/learn-from-css/" class="next">下一篇</a></div><div class="copyright"><p>© 2015 - 2020 <a href="http://yoursite.com">Leon</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>

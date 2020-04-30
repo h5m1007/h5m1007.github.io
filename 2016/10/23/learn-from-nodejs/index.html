@@ -1,0 +1,79 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> NodeJs 全记录三 · Leooon Blog</title><meta name="description" content="NodeJs 全记录三 - Leon"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://yoursite.com/atom.xml" title="Leooon Blog"><meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Leooon Blog" type="application/atom+xml">
+</head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/sunchongsheng" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/pinggod" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">NodeJs 全记录三</h1><div class="post-info">Oct 23, 2016</div><div class="post-content"><p>前端程序猿的第二春 使用老本行JS来构建服务器端的神器  NodeJs</p>
+<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><p>讨论前，引入几个关键词：  </p>
+<ul>
+<li>全局对象  global、process</li>
+<li>模块系统  require、module、exports</li>
+<li>事件  EventEmitter(事件分发器)</li>
+<li>buffer  对二进制数据处理，对数据编码转换</li>
+</ul>
+<h2 id="全局对象"><a href="#全局对象" class="headerlink" title="全局对象"></a>全局对象</h2><ul>
+<li>global  类似window对象，global对象上任何属性都可被全局访问</li>
+<li>process  全局执行上下文都在process对象中，类似的如window.title表示浏览器窗口名，而process.title表示node中进程名</li>
+</ul>
+<h2 id="模块系统"><a href="#模块系统" class="headerlink" title="模块系统"></a>模块系统</h2><p><a href="../2016/10/19/learn-from-nodejs/#section">参考全记录一 模块</a></p>
+<h2 id="加载方式"><a href="#加载方式" class="headerlink" title="加载方式"></a>加载方式</h2><p>选择一种代码组织策略，保证每个模块都是独立的，则就得确定好各模块的加载方式      </p>
+<ul>
+<li>第一种加载方式<br>将模块的函数<strong>挂载</strong>到exports对象的<strong>属性</strong>上<br>通过调用exports对象的属性可以获取多个该函数的实例  </li>
+</ul>
+<p><strong>server.js</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    var Person &#x3D; require(&#39;.&#x2F;person&#39;).Person,</span><br><span class="line">        person1 &#x3D; new Person(),</span><br><span class="line">        person2 &#x3D; new Person();</span><br><span class="line">    person1.setName(&quot;leon1&quot;);</span><br><span class="line">    person2.setName(&quot;leon2&quot;);</span><br><span class="line">    person1.sayHello(); &#x2F;&#x2F; Hello leon1</span><br><span class="line">    person2.sayHello(); &#x2F;&#x2F; Hello leon2</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>person.js</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    function Person()&#123;</span><br><span class="line">      var name;</span><br><span class="line">      this.setName &#x3D; function(theName)&#123;</span><br><span class="line">        name &#x3D; theName;</span><br><span class="line">      &#125;</span><br><span class="line">      this.sayHello &#x3D; function()&#123;</span><br><span class="line">        console.log(&#39;Hello&#39;,name);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    exports.Person &#x3D; Person;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>第二种加载方式<br>第三种方式其实是对第二种方式的优化，主要利用<strong>全局变量module</strong>  </li>
+</ul>
+<p><strong>server.js</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    var Person &#x3D; require(&#39;.&#x2F;person&#39;),</span><br><span class="line">    &#x2F;&#x2F; ...</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>person.js</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    &#x2F;&#x2F; ...</span><br><span class="line">    module.exports &#x3D; Person;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h2><p>node有关事件处理的API接口，EventEmitter<br>该API定义了on、emit、removeListener方法  </p>
+<ul>
+<li>应用</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    var EventEmitter &#x3D; require(&#39;events&#39;).EventEmitter,</span><br><span class="line">     a &#x3D; new EventEmitter;</span><br><span class="line">    a.on(&#39;event&#39;, function()&#123;</span><br><span class="line">     &#x2F;&#x2F; 为事件event注册侦听器</span><br><span class="line">     console.log(&#39;event called&#39;);</span><br><span class="line">    &#125;);</span><br><span class="line">    a.emit(&#39;event&#39;); &#x2F;&#x2F; 手动触发事件event</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>以<code>process.EventEmitter</code>暴露接口</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    &#x2F;&#x2F; 添加至自建类上</span><br><span class="line">    var EventEmitter &#x3D; process.EventEmitter,</span><br><span class="line">        MyClass &#x3D; function()&#123;&#125;; &#x2F;&#x2F; 声明个函数模拟类</span><br><span class="line">    &#x2F;&#x2F; __proto__让MyClass的Func继承EventEmitter所有方法和属性</span><br><span class="line">    MyClass.prototype.__proto__ &#x3D; EventEmitter.prototype;</span><br><span class="line">    var a &#x3D; new MyClass;</span><br><span class="line">    a.on(&#39;event&#39;, function()&#123;</span><br><span class="line">        &#x2F;&#x2F; 为事件event注册侦听器</span><br><span class="line">        console.log(&#39;event called&#39;);</span><br><span class="line">    &#125;);</span><br><span class="line">    a.emit(&#39;event&#39;); &#x2F;&#x2F; 手动触发事件event</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="Stream流"><a href="#Stream流" class="headerlink" title="Stream流"></a>Stream流</h2><p>如同html文本流，stream流在process全局对象中包含有三流对象  </p>
+<ul>
+<li>stdin  输入流即可读流 默认状态暂停<br>  <code>stdin.resume()</code>  保持用户输入状态<br>  <code>stdin.pause()</code>  暂停用户输入状态<br>  <code>stdin.on(&#39;data&#39;, option)</code>  用于监听输入数据变化  </li>
+<li>stdout  输出流即可写流<br>  如 <code>console.log()</code> 输出指定字符串且其后加上(\n) 并写入stdout流<br>  而 <code>process.stdout.write(str)</code> 直接输出字符串且不过行 同一行继续输出  </li>
+<li>stderr  错误流即可写流</li>
+</ul>
+<h2 id="fs模块"><a href="#fs模块" class="headerlink" title="fs模块"></a>fs模块</h2><p><code>var fs = require(&#39;fs&#39;)</code> 引入node内置模块fs  </p>
+<ul>
+<li><p><code>fs.readdir(&#39;src&#39;, function(err, files){})</code><br>  fs.readdir读取指定资源目录(参数一)<br>  files(参数二)包含指定目录下所有<strong>文件名称</strong>的数组  </p>
+</li>
+<li><p><code>fs.stat(&#39;src&#39;, function(err, stat){})</code><br>  fs.stat返回文件或目录的<strong>元数据</strong>(描述数据的信息，即数据的属性等特性)<br>  当src为 <code>__dirname</code> 时，则获取当前执行文件所在的目录<br>  当src为 <code>process.cwd()</code> 时，则获取当前执行文件的工作目录即运行时的目录<br>  <code>stat.isDirectory()</code>  可判断stat对象是否为目录</p>
+</li>
+<li><p><code>fs.readFile(&#39;src&#39;, function(err, data){})</code><br>  <code>data</code>  返回指定资源目录文件的内容</p>
+</li>
+<li><p><code>fs.createReadStream()</code>  为文件创建可读的Stream对象<br>  对于处理大文件，采取分割文件，单块读取更高效率  </p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    var stream &#x3D; fs.createReadStream(&#39;file&#39;);</span><br><span class="line">    stream.on(&#39;data&#39;, function(chunk)&#123;</span><br><span class="line">        &#x2F;&#x2F; 处理单块文件内容</span><br><span class="line">    &#125;);</span><br><span class="line">    stream.on(&#39;end&#39;, function(chunk)&#123;</span><br><span class="line">        &#x2F;&#x2F; 文件读取完毕</span><br><span class="line">    &#125;);</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>fs.watchFile</code>监视指定文件  <code>fs.watch</code>监视整个目录<br>  监视文件或目录发生变化时，分发一个事件，然后触发回调  </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    var stream &#x3D; fs.createReadStream(&#39;file&#39;),</span><br><span class="line">        fs &#x3D; require(&#39;fs&#39;),</span><br><span class="line">        files &#x3D; fs.readdirSync(process.cwd());</span><br><span class="line"></span><br><span class="line">    files.forEach(function(file)&#123;</span><br><span class="line">        &#x2F;&#x2F; 监听.css后缀文件</span><br><span class="line">        if(&#x2F;\.css&#x2F;.test(file))&#123;</span><br><span class="line">            fs.watchFile(process.cwd() + &#39;&#x2F;&#39; + file, function()&#123;</span><br><span class="line">                console.log(&#39; - &#39; + file + &#39; changed!&#39;);</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="process"><a href="#process" class="headerlink" title="process"></a>process</h2><p>访问全局执行文件上下文</p>
+<ul>
+<li><code>process.stdout.write(str)</code>  输出字符串同一行继续输出</li>
+<li><code>process.cwd()</code>  返回当前文件运行工作时所在路径</li>
+<li><code>process.exit(1)</code>  退出进程</li>
+<li><code>process.on(&#39;SIGKILL&#39;, function(){});</code>  接收进程终止信号</li>
+</ul>
+</div></article></div></main><footer><div class="paginator"><a href="/2016/10/23/learn-from-nodejs/" class="prev">上一篇</a><a href="/2016/10/21/learn-from-nodejs/" class="next">下一篇</a></div><div class="copyright"><p>© 2015 - 2020 <a href="http://yoursite.com">Leon</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>

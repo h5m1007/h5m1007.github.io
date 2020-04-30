@@ -1,0 +1,58 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 重新排版本博客 记录 · Leooon Blog</title><meta name="description" content="重新排版本博客 记录 - Leon"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://yoursite.com/atom.xml" title="Leooon Blog"><meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Leooon Blog" type="application/atom+xml">
+</head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/sunchongsheng" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/pinggod" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">重新排版本博客 记录</h1><div class="post-info">Oct 15, 2016</div><div class="post-content"><p>重构博客，简化博客排版和样式，增加页面浏览，一些额外辅助功能</p>
+<h2 id="样式"><a href="#样式" class="headerlink" title="样式"></a>样式</h2><ul>
+<li>box-sizing<br>设置或检索对象(元素)的盒模型组成模式  </li>
+</ul>
+<p>值有:<br><code>border-box</code>  padding与border会被包含其对象(元素)的width及height之内，即元素的实际(总)宽度等于width<br>默认的<code>content-box</code>  表现为标准模式的盒模型  </p>
+<p>应用：<br>设置全局标签块<code>box-sizing:border-box;</code>，在页面中，侧边栏与中间主内容块，之间的间隔将得到很好的处理  </p>
+<ul>
+<li>background<br>| <code>background-size: contain;</code>  等价于 <code>background-size: 100% auto;</code>  背景高度等于容器高度，宽度auto<br>| <code>background-size: cover;</code>  等价于 <code>background-size: auto 100%;</code>  背景宽度等于容器宽，高度auto<br>| <code>background-origin</code>  可选属性有：<code>border-box</code> 指定背景在<strong>容器边框</strong>左上角开始延展、’padding-box’ <strong>容器内边距</strong>左上角开始延展、’content-box’ <strong>容器内容区域</strong>开始延展<br>| <code>background-clip</code> 背景图位置不变，只是裁剪背景图的显示区域，可选属性有：<code>border-box</code> 从容器的border区域(不包含border)开始向<strong>四周</strong>裁剪背景、’padding-box’ 从容器的padding区域(不包含padding)开始向<strong>四周</strong>裁剪背景、’content-box’ 从content区域开始向<strong>四周</strong>裁剪背景  </li>
+</ul>
+<h3 id="动画"><a href="#动画" class="headerlink" title="动画"></a>动画</h3><p><strong>关键字</strong>：<code>transform</code> 变换属性  <code>transition</code> 渐变效果  <code>@keyframs</code>关键帧  </p>
+<ul>
+<li><p><code>transform</code><br>| 1. <code>transform:rotate(60deg)</code>  使元素<strong>旋转</strong>，元素将沿中轴线顺时针偏转60度，可选值还有 <code>rotateX()</code>、<code>rotateY()</code>、<code>rotateZ()``rotate3d()</code>，而 <code>rotate3d(x,y,z,deg)</code> 是提供在其它向量上应用旋转，如 <code>rotate3d(1,-1,0,60deg)</code><br>| 2. <code>transform:skew(30deg,10deg)</code>  使元素<strong>变形</strong>，元素将在x轴偏转30度，y轴偏转10度<br>| 3. <code>transform:scale(1.1,1.1)</code>  使元素<strong>缩放</strong>，元素将在x、y周放大1.1倍，但元素内容会被拉伸而失真，可选值有：<code>scaleX()</code>、<code>scaleY()</code>、<code>scaleZ()</code><br>| 4. <code>transform:translate(100px,20px)</code>  使元素<strong>位移</strong>，元素将在x轴向右位移100px，在y轴向下位移20px，可选值有：<code>translateX()</code>、<code>translateY()</code>、<code>translateZ()</code>  </p>
+</li>
+<li><p><code>transition</code>  使元素产生渐变过渡效果<br><code>transition: all 2s ease 2s;</code>  &lt;== 需要事件来触发，如鼠标划过、鼠标点击等  最多接受四个参数，分别是属性、过渡时间、过渡函数、延迟时间<br>| 1. 属性指的是需要增加过渡效果的属性名，如</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">    #content&#123;</span><br><span class="line">        width: 100px;</span><br><span class="line">        height: 100px;</span><br><span class="line">        transition: height 2s;</span><br><span class="line">    &#125;</span><br><span class="line">    #content:hover&#123;</span><br><span class="line">        height: 200px; &#x2F;*由100px在2s内平滑过渡至200px*&#x2F;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;&#x2F;style&gt;</span><br></pre></td></tr></table></figure>
+
+<p>| 2. 过渡时间指的是渐变过渡效果作用到指定属性所需时间  </p>
+<p>| 3. 过渡函数指的是设置渐变动画，可选值有：<br>| 3.1 <code>ease</code>  默认值，逐渐变慢<br>| 3.2 <code>linear</code>  匀速<br>| 3.3 <code>ease-in</code>  加速<br>| 3.4 <code>ease-out</code>  减速<br>| 3.5 <code>ease-in-out</code>  加速再减速  </p>
+<ul>
+<li><code>@keyframs</code><br>关键帧，结合 <code>animation</code> 属性来制作动画  </li>
+</ul>
+<p>两种写法：  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">    &#x2F;*第一种写法*&#x2F;</span><br><span class="line">    @keyframes spin&#123;</span><br><span class="line">        from&#123;</span><br><span class="line">            transform: rotate(0);</span><br><span class="line">        &#125;</span><br><span class="line">        to&#123;</span><br><span class="line">           transform: rotate(360deg); </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    &#x2F;*第二种写法*&#x2F;</span><br><span class="line">    @keyframes spin&#123;</span><br><span class="line">        0%&#123;</span><br><span class="line">            transform: rotate(0);</span><br><span class="line">        &#125;</span><br><span class="line">        50%&#123;</span><br><span class="line">            transform: rotate(180deg);</span><br><span class="line">        &#125;</span><br><span class="line">        100%&#123;</span><br><span class="line">            transform: rotate(360deg);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;&#x2F;style&gt;</span><br></pre></td></tr></table></figure>
+
+<p><code>@keyframes</code>  声明后需写上动画名称，而 <code>{}</code> 内就是一些在<strong>不同时间段</strong>(具体值由 <code>animation</code> 指定时间决定 )应用的样式，配合元素中定义的animation属性，来定义动画  </p>
+<p><code>animation</code>  完整写法：  </p>
+<p><code>animation: name time speed delay loop alternate;</code>  </p>
+<p>| 1. name指的是动画名称，由<strong>关键帧</strong>的声明后写的<strong>动画名</strong>决定<br>| 2. time指的是动画<strong>执行一次</strong>所需时间<br>| 3. speed指的是动画<strong>速度函数</strong>，和 <code>transition</code> 的过渡函数值一致<br>| 4. delay指的是动画开始前的<strong>延迟时间</strong><br>| 5. loop指的是动画<strong>循环次数</strong>，值为 <code>infinite</code> 无限循环<br>| 6. alternate指的是动画正向循环完后再反向循环  </p>
+<p>如：<code>animation: spin 2s linear 2s infinite alternate;</code>  spin动画在2秒后匀速以每2秒正方向无限循环播放一次</p>
+<h3 id="媒体查询-media"><a href="#媒体查询-media" class="headerlink" title="媒体查询@media"></a>媒体查询@media</h3><p>在css的控制上，实现所谓的响应式设计，关键字： <code>@media</code>  </p>
+<ul>
+<li><code>@media screen and (min-width: 600px) and (max-width: 900px)</code>  </li>
+</ul>
+<p>[1] screen指的是媒介类型，可选还有 <code>only-screen</code><br>[2] and作为条件，可叠加多个条件<br>[3] and条件表示限制的屏幕范围，常用属性width，参考可选有：&gt;=320px为小屏幕手机，320px<del>768px为大屏幕手机，768px</del>1024px为平板，&gt;=1024为PC<br>[4] and条件判断横竖屏，可选属性有： <code>orientation: portrait</code>  判断设备为横向； <code>orientation: landscape</code>  判断设备为竖向  </p>
+<h2 id="排版"><a href="#排版" class="headerlink" title="排版"></a>排版</h2><ul>
+<li>侧边栏<br>内容采用无样式标签，类名为<code>wrap</code>，表示包，包裹其内容，有历史文章、分类、标签  </li>
+</ul>
+<h3 id="弹性盒子"><a href="#弹性盒子" class="headerlink" title="弹性盒子"></a>弹性盒子</h3><p>关键字： <code>box-flex</code>  在分栏布局上，各种方案层出不穷，但唯独 <code>box-flex</code> 来得更加简单高效，只是兼容性不佳，应用在移动端更为适用  </p>
+<ul>
+<li>用法  </li>
+</ul>
+<p>[1] 对其父元素声明  <code>.father{ display: box}</code>  先声明父元素空间可被子元素分配<br>[2] 子元素声明  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">    son1&#123;</span><br><span class="line">        box-flex: 1;</span><br><span class="line">    &#125;</span><br><span class="line">    son2&#123;</span><br><span class="line">        box-flex: 3;</span><br><span class="line"></span><br><span class="line">        &#x2F;*亦可设值为固定px*&#x2F;</span><br><span class="line">        &#x2F;*box-flex: 400px;*&#x2F;</span><br><span class="line">    &#125;</span><br><span class="line">    son3&#123;</span><br><span class="line">        boxf-flex: 1;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;&#x2F;style&gt;</span><br></pre></td></tr></table></figure>
+
+<p>实现 1:3:1 三栏布局  </p>
+<p>[3] 兼容写法  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.father&#123;</span><br><span class="line">    display: -webkit-box;</span><br><span class="line">    display: box;</span><br><span class="line">&#125;</span><br><span class="line">.son&#123;</span><br><span class="line">    -webkit-box-flex: 3;</span><br><span class="line">    box-flex: 3;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>属性</li>
+</ul>
+<p>[1] box-align  设置box在垂直方向上的对齐方式，可选值有stretch、start、end、center、baseline</p>
+<p>[2] box-pack<br>设置box在水平剩余空间的分配，可选值有start、end、center、justify</p>
+<p>[3] box-direction<br>设置box的子元素的排列顺序，可选值有normal、reverse、inherit</p>
+</div></article></div></main><footer><div class="paginator"><a href="/2016/10/16/learn-from-git/" class="prev">上一篇</a><a href="/2016/10/08/learn-from-H5&amp;CSS3/" class="next">下一篇</a></div><div class="copyright"><p>© 2015 - 2020 <a href="http://yoursite.com">Leon</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>

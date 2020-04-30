@@ -1,0 +1,79 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> NodeJs 全记录七 · Leooon Blog</title><meta name="description" content="NodeJs 全记录七 - Leon"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://yoursite.com/atom.xml" title="Leooon Blog"><meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Leooon Blog" type="application/atom+xml">
+</head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/sunchongsheng" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/pinggod" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">NodeJs 全记录七</h1><div class="post-info">Nov 1, 2016</div><div class="post-content"><p>前端程序猿的第二春 使用老本行JS来构建服务器端的神器  NodeJs</p>
+<h2 id="websocket"><a href="#websocket" class="headerlink" title="websocket"></a>websocket</h2><ul>
+<li><p>websocket是一个协议，类似于TCP/IP、HTTP协议，但它们需要有socket辅助来提供给外部调用的API，而websocket本身就有一个 <strong>WebSocket API</strong>  </p>
+</li>
+<li><p>使用socket这样的网络协议APIs不会符合原始安全模型，而websocket则不会，它提供给H5应用TCP的方式却不会削弱网络安全且还能同时拥有现代API  </p>
+</li>
+<li><p>websocket相对于http协议，拟补了http不适合<strong>实时通信</strong>的缺陷，websocket以异步双向通信模式，通过传输层协议使其更急有灵活性  </p>
+</li>
+<li><p>websocket协议能够让客户端和远程服务器端通过web建立<strong>全双工通信</strong>，且支持二进制字符串和文本字符串，协议包含打开<strong>握手</strong>之后的基本消息框架  </p>
+</li>
+</ul>
+<h3 id="websocket-API"><a href="#websocket-API" class="headerlink" title="websocket API"></a>websocket API</h3><ul>
+<li><p>websocket的接口，可通过它来建立<strong>全双工通道</strong>来收发消息，当连接远程服务器，只需创建一个websocket实体，即实例化一个实例，并传入类似 “ws://<a href="http://www.xxx.com&quot;" target="_blank" rel="noopener">www.xxx.com&quot;</a> 的URL  </p>
+</li>
+<li><p>客户端和服务端在开始握手的期间，http会升级至websocket，这样建立了连接，其底层都是TCP协议  </p>
+</li>
+<li><p>websocket api 是<strong>纯事件驱动</strong>的，即可使用异步事件监听来连接其整个生命周期的每个阶段  </p>
+</li>
+</ul>
+<p><code>onopen()</code><br>一旦服务器响应websocket连接请求后触发open事件，这意味着协议握手结束，websocket已准备好收发数据，也就是说现在可确定服务端已经处理好了建立连接的请求，同意和你的应用通信了  </p>
+<p><code>onmessage()</code><br>一旦websocket收到数据后触发message事件  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    &#x2F;&#x2F; ...</span><br><span class="line">    ws.onmessage &#x3D; function(e)&#123;</span><br><span class="line">        if(e.data)&#123;</span><br><span class="line">            console.log(e.data);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<p><code>onerror</code><br>连接失败或其它操作引起错误等都会触发error事件，从而导致连接关闭  </p>
+<p><code>onclose</code><br>连接关闭时触发close事件，之后客户端和服务器就不能再通信了  </p>
+<ul>
+<li><p>建立其全双工连接，服务器发送数据或资源给客户端，它能自动发送状态改变的<strong>数据和通知</strong>，从而我们无须为了状态的更新而去轮询server，只要在客户端进行监听即可  </p>
+</li>
+<li><p>websocket对象的实例有两个方法：<code>send()</code>  <code>close()</code>  </p>
+</li>
+</ul>
+<p><code>send()</code><br>提供给服务端和客户端相互发送消息的方法，但需要在 <code>onopen</code> 连接完全建立了才能使用该方法  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    &#x2F;&#x2F; ...</span><br><span class="line">    ws.onopen &#x3D; function(e)&#123;</span><br><span class="line">        ws.send(str);</span><br><span class="line">    &#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<p><code>close()</code><br>手动关闭连接，一旦使用该方法，将不能再发送数据  </p>
+<p><code>ws.close(status, &quot;reason&quot;)</code>  可选两参数，状态码和关闭原因  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    ws.close(</span><br><span class="line">        1000,</span><br><span class="line">        &quot;Closing normally!&quot;</span><br><span class="line">    )</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>websocket对象有三个属性：readyState、bufferedAmount、Protocol</li>
+</ul>
+<p><code>ws.readyState</code><br>该属性来表示连接状态，会随着连接状态变化而变化  </p>
+<table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="right">值</th>
+<th align="center">状态</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">WebSocket.CONNECTING</td>
+<td align="right">0</td>
+<td align="center">连接正进行但未建立</td>
+</tr>
+<tr>
+<td align="left">WebSocket.OPEN</td>
+<td align="right">1</td>
+<td align="center">连接已建立可发送消息</td>
+</tr>
+<tr>
+<td align="left">WebSocket.CLOSING</td>
+<td align="right">2</td>
+<td align="center">正关闭握手</td>
+</tr>
+<tr>
+<td align="left">WebSocket.CLOSED</td>
+<td align="right">3</td>
+<td align="center">连接已关闭或不能打开</td>
+</tr>
+</tbody></table>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    &#x2F;&#x2F; ...</span><br><span class="line">    if(ws.readyState &#x3D;&#x3D;&#x3D; WebSocket.OPEN)&#123;</span><br><span class="line">        &#x2F;&#x2F; 待连接已建立</span><br><span class="line">        ws.send(data);</span><br><span class="line">    &#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<p><code>ws.bufferedAmount</code><br><code>send()</code>发送的数据不会立即传输，而是被浏览器缓存每次应用流出的数据，bufferedAmount可用来检查每次流出的数据大小，而这些数据已进入队列但未被传输  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    var ws &#x3D; new WebSocket(&quot;ws:&#x2F;&#x2F;echo.websocket.org&quot;),</span><br><span class="line">        maxData &#x3D; 10240;</span><br><span class="line">    ws.onopen &#x3D; function()&#123;</span><br><span class="line">        setInterval(function()&#123;</span><br><span class="line">            if(ws.bufferedAmount &lt; maxData)&#123;</span><br><span class="line">                ws.send()</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,1000);</span><br><span class="line">    &#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<p><code>ws.protocol</code><br>返回当前使用的websocket协议，由服务器提供  </p>
+</div></article></div></main><footer><div class="paginator"><a href="/2016/11/05/prepare-resume-record/" class="prev">上一篇</a><a href="/2016/11/01/learn-from-react/" class="next">下一篇</a></div><div class="copyright"><p>© 2015 - 2020 <a href="http://yoursite.com">Leon</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 从0开始配置新购MBP · Leooon Blog</title><meta name="description" content="从0开始配置新购MBP - Leon"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://yoursite.com/atom.xml" title="Leooon Blog"><meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Leooon Blog" type="application/atom+xml">
+</head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/sunchongsheng" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/pinggod" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">从0开始配置新购MBP</h1><div class="post-info">Apr 30, 2020</div><div class="post-content"><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>新入手的 mbp，需要重新配置之前前端开发的环境，已经准备同步的内容有：</p>
+<ol>
+<li><p>Safari，Chrome 两大浏览器的历史数据，如浏览记录、书签、密码、拓展插件等等，分别以 iCould 和 Google 账号<br>的同步功能，实现迁移机器数据的完美同步。</p>
+</li>
+<li><p>其它软件的同步工作，如软件之前的配置，安装的插件等等。</p>
+<p> 开发软件列表：</p>
+<ul>
+<li><p>iTerm2：移步<a href="/2020/04/30/best-terminal-configure/">打造最佳终端</a>;</p>
+</li>
+<li><p>幕布：类似于Xmind脑图软件，用登录账号来实现同步已保存至云端的数据；</p>
+</li>
+<li><p>SwitchHosts：本地 hosts 文件修改软件，直接导入已从其它机器导出的配置文件即可；</p>
+</li>
+<li><p>VsCode：重量级软件，开发必备编辑器，同步功能使用 vscode 的 Setting Sync 插件，通过已在 gist 上传的配置文件来<br>实现同步工作，可同步之前已安装插件列表、软件配置等等；</p>
+</li>
+</ul>
+</li>
+<li><p>除了以上软件的配置安装之外，额外的坑还有：</p>
+<ul>
+<li><p>科学上网</p>
+<p>  没有梯子没有条件就创造条件，国内想 download 一些如 brew、pip、乃至于用 git clone 都是基本没速度可言的，针对以上软件参考解决方案如下：</p>
+<p>  <strong>brew</strong>：按照官方安装方式，因GFW的存在，可能会遇到下载不了或没速度，所以得换种方式，</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh &gt;&gt; ~/brew_install.sh</span><br></pre></td></tr></table></figure>
+
+<p>  修改 brew_install.sh 文件，更换里面的镜像源  </p>
+<p>  <code>BREW_REPO = &quot;https://github.com/Homebrew/brew”</code><br>  ==&gt;<br>  <code>BREW_REPO=&quot;https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git”</code></p>
+<p>  再执行 brew_install.sh 文件</p>
+<p>  安装完成后，再去修改 brew、homebrew-core 的项目 git remote 镜像源</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> <span class="string">"<span class="variable">$(brew --repo)</span>"</span></span><br><span class="line"></span><br><span class="line">git remote <span class="built_in">set</span>-url origin https://mirrors.ustc.edu.cn/brew.git</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> <span class="string">"<span class="variable">$(brew --repo)</span>/Library/Taps/homebrew/homebrew-core"</span></span><br><span class="line"></span><br><span class="line">git remote <span class="built_in">set</span>-url origin https://mirrors.ustc.edu.cn/homebrew-core.git</span><br></pre></td></tr></table></figure>
+
+<p>  最后更新下 brew <code>brew update</code></p>
+<p>  <strong>pip</strong>：pip 是 python 包管理工具，系统默认自带的 python2.7 安装包里 easy_install.py 是默认安装的，而 pip 需另外安装</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo easy_install pip</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Git 下载速度</p>
+</li>
+<li><p>Node</p>
+</li>
+<li><p>Python pip</p>
+</li>
+</ul>
+</li>
+</ol>
+</div></article></div></main><footer><div class="paginator"><a href="/2020/04/30/best-terminal-configure/" class="prev">上一篇</a><a href="/2020/04/17/learn-from-optimize/" class="next">下一篇</a></div><div class="copyright"><p>© 2015 - 2020 <a href="http://yoursite.com">Leon</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>

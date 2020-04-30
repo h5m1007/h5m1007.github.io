@@ -1,0 +1,76 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> docker · Leooon Blog</title><meta name="description" content="docker - Leon"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://yoursite.com/atom.xml" title="Leooon Blog"><meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Leooon Blog" type="application/atom+xml">
+</head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/sunchongsheng" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/pinggod" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">docker</h1><div class="post-info">Jun 21, 2019</div><div class="post-content"><h1 id="dockerfile-和-docker-compose-的关系"><a href="#dockerfile-和-docker-compose-的关系" class="headerlink" title="dockerfile 和 docker-compose 的关系"></a>dockerfile 和 docker-compose 的关系</h1><p>背景是需要搭建个wordpress。</p>
+<p>Q: 假如你不用 docker ，搭建 wordpress 怎么弄？<br>A: 先找台 server ，假设其 OS 为 Ubuntu ，然后按照文档一步步敲命令，写配置.</p>
+<p>Q: 用 docker 呢？<br>A: 随便找台 server ，不管什么操作系统，只要支持 docker 就行，<br>执行终端命令 <code>docker run ubuntu</code>，docker 会从官方源里拉取最新的 Ubuntu 镜像，<br>可以认为你开了个 Ubuntu 虚拟机，然后一步步安装，跟上面一样。</p>
+<p>BUT，但是这样安装有个显著的缺点，一旦 container (容器) 被删，你做的工作就都没了。<br>当然可以用命令<code>docker commit</code> 来保存成镜像，这样就可以复用了。</p>
+<p>但是镜像一般比较大，而且只分享镜像的话，别人也不知道你这镜像到底包含什么，<br>这些问题都不利于分享和复用。一个直观的解决方案就是，写个脚本把安装过程全部记录下来，<br>这样再次安装的时候，执行脚本就行了。</p>
+<p>而 Dockerfile 就是这样的脚本，它记录了一个镜像的制作过程。有了 <em>Dockerfile</em>, 只要执行<br><code>docker build</code> ，就能制作镜像，而且 <em>Dockerfile</em> 就是文本文件，修改也很方便。</p>
+<p>现在有了 wordpress 的镜像，只需要 docker run 就把 wordpress 启动起来了。</p>
+<p>如果仅仅是 wordpress, 这也就够了。但是很多时候，需要多个镜像合作才能启动一个服务，<br>比如前端要有 nginx ，数据库 mysql , 邮件服务等等，当然你可以把所有这些都弄到一个镜像里去，<br>但这样做就无法复用了。更常见的是, nginx, mysql, smtp 都分别是个镜像，然后这些镜像合作，<br>共同服务一个项目。<em>docker-compose</em> 就是解决这个问题的。你的项目需要哪些镜像，每个镜像怎么<br>配置，要挂载哪些 volume, 等等信息都包含在 docker-compose.yml 里。要启动服务，<br>只需要执行命令 <code>docker-compose up</code> 就行，停止也只需要 <code>docker-compse stop/down</code>。</p>
+<p>简而言之， <em>Dockerfile</em> 记录单个镜像的构建过程，<em>docker-compse.yml</em> 记录一个<br>项目(project, 一般是多个镜像)的构建过程。</p>
+<p>至于结合使用 dockerfile+docker-compose, 是因为 <em>docker-compose.yml</em> 本身没有镜像<br>构建的信息，如果镜像是从 <code>docker registry</code> 拉取下来的，那么 <em>Dockerfile</em> 就不需要；<br>如果镜像是需要 build 的，那就需要提供 <em>Dockerfile</em>。</p>
+<h1 id="Dockerfile、Docker镜像和-Docker容器的关系"><a href="#Dockerfile、Docker镜像和-Docker容器的关系" class="headerlink" title="Dockerfile、Docker镜像和 Docker容器的关系"></a>Dockerfile、Docker镜像和 Docker容器的关系</h1><p><a href="http://blog.csdn.net/zhousenshan/article/details/51501734" target="_blank" rel="noopener">click</a></p>
+<h1 id="Dockerfile-详解"><a href="#Dockerfile-详解" class="headerlink" title="Dockerfile 详解"></a>Dockerfile 详解</h1><p><a href="http://blog.csdn.net/mozf881/article/details/55798811" target="_blank" rel="noopener">click</a></p>
+<h1 id="多进程管理工具-Supervisor-Dockerfile"><a href="#多进程管理工具-Supervisor-Dockerfile" class="headerlink" title="多进程管理工具 - Supervisor + Dockerfile"></a>多进程管理工具 - Supervisor + Dockerfile</h1><p><a href="https://www.linuxprobe.com/docker-process-management1.html" target="_blank" rel="noopener">click</a></p>
+<h1 id="linux-docker-dockerfile-supervisor-终端命令回忆录"><a href="#linux-docker-dockerfile-supervisor-终端命令回忆录" class="headerlink" title="linux + docker + dockerfile + supervisor 终端命令回忆录"></a>linux + docker + dockerfile + supervisor 终端命令回忆录</h1><p>查看端口情况<br><code>netstat -ntlp</code></p>
+<p>查看端口映射关系<br><code>iptables -t nat -L -n</code></p>
+<p>端口映射 - linux<br><code>iptables -t nat -A DOCKER -p tcp --dport 8001 -j DNAT --to-destination x.x.x.x:8000</code></p>
+<p>sudo docker run –detach <br>  –hostname gitlab.example.com <br>  –publish 443:443 –publish 88:80 –publish 23:22 <br>  –name gitlab <br>  –restart always <br>  –volume /srv/gitlab/config:/etc/gitlab <br>  –volume /srv/gitlab/logs:/var/log/gitlab <br>  –volume /srv/gitlab/data:/var/opt/gitlab <br>  gitlab/gitlab-ce:latest</p>
+<p>关闭端口映射关系 (需要重启生效)<br><code>iptables -A DOCKER -p tcp --dport 8001 -j DROP</code></p>
+<p>端口映射 - mac<br><code>lsof -i -P | grep docke</code><br><code>sudo vim /etc/pf.anchors/eclipse.tomcat.forwarding</code><br><code>rdr pass on lo0 inet proto tcp from any to 127.0.0.1 port 3333 -&gt; x.x.x.x port 3333</code><br><code>sudo pfctl -ef /etc/pf-tomcat.conf</code></p>
+<h1 id="导致docker自启不了可能的原因"><a href="#导致docker自启不了可能的原因" class="headerlink" title="导致docker自启不了可能的原因"></a>导致docker自启不了可能的原因</h1><ol>
+<li>宿主机自启服务的端口与容器自启服务端口有冲突</li>
+</ol>
+<p>查看docker容器IP<br><code>docker inspect auto_testing | grep IPAddress</code></p>
+<p>查看正在运行容器 &amp; 查看所有包括停止的容器<br><code>docker ps</code> &amp; <code>docker ps -a</code></p>
+<p>启动已停止的容器<br><code>docker start auto_testing</code></p>
+<p>进入容器并执行指定命令（Ctrl + P + Q 退出容器保持后台运行）<br><code>docker exec -it auto_testing /bin/bash</code></p>
+<p>查看容器在它生命周期的记录<br><code>docker logs auto_testing</code><br><em>注意事项</em> 当run容器后，启动不了容器，检查下log可发现问题</p>
+<p>基于现有容器提交镜像至本地库<br><code>docker commit -m=&quot;for auto testing&quot; --author=&quot;xxx&quot; auto_testing auto_testing/ubuntu:v1</code></p>
+<p>pull下来的镜像可能某些工具缺失<br><code>apt-get update &amp;&amp; \
+apt-get install -y vim procps net-tools git</code></p>
+<p>后台启动容器并指定端口映射<br><code>docker run --restart=always --name auto_testing_v1 -d -p 8360:8360 -p 27018:27017 -p 9002:9001 auto_testing/ubuntu:v1 supervisord -n -c /etc/supervisord.conf</code></p>
+<p><code>docker run --restart=always --privileged --name auto_testing \
+-d -p 8360:8360 -p 27018:27017 -p 9002:9001 \
+ubuntu/auto_testing:1.0 /bin/bash \
+-c &quot;while true;do echo hello world; sleep;done&quot;</code></p>
+<p><code>docker run --restart=always --privileged --name nginx-test-1 \
+-d -p 80:80 nginx /bin/bash \
+-c &quot;while true;do echo hello world; sleep;done&quot;
+-v /pengzhiyang/nginx/conf.d:/etc/nginx/conf.d \</code></p>
+<p>安装supervisor<br><code>yum install python-setuptools</code></p>
+<p>生成supervisor配置文件模板</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">easy_install supervisor</span><br><span class="line">echo_supervisord_conf &gt; &#x2F;etc&#x2F;supervisord.conf</span><br></pre></td></tr></table></figure>
+
+<p>使用配置文件启用supervisor<br><code>supervisord -c /etc/supervisord.conf</code></p>
+<p>查看运行进程<br><code>supervisorctl status</code></p>
+<p>停用supervisor<br><code>supervisorctl shutdown</code></p>
+<p>#auto_testing 容器已部署的模块</p>
+<ol>
+<li>系统ubuntu</li>
+<li>git</li>
+<li>node</li>
+<li>mongo<br>安装路径：<code>/projects/mongodb</code></li>
+</ol>
+<p>配置环境变量<br><code>vi /etc/profile</code><br>末行位置新增</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export MONGODB_HOME&#x3D;&#x2F;projects&#x2F;mongodb</span><br><span class="line">export PATH&#x3D;&#x2F;projects&#x2F;mongodb&#x2F;bin:$PATH</span><br></pre></td></tr></table></figure>
+
+<p><code>vi /etc/rc.local</code><br>配置开机启动服务(后台运行)：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;projects&#x2F;mongodb&#x2F;bin&#x2F;mongod \</span><br><span class="line">--fork --port 27017 \</span><br><span class="line">--dbpath&#x3D;&#x2F;projects&#x2F;mongodb&#x2F;db \</span><br><span class="line">--logpath&#x3D;&#x2F;projects&#x2F;mongodb&#x2F;logs&#x2F;mongodb.log --logappend</span><br></pre></td></tr></table></figure>
+
+<p>取消占用<br><code>rm -rf /projects/mongodb/db/mongod.lock</code></p>
+<p>查看进程占用<br><code>netstat -ntpl</code></p>
+<p>强制杀掉占用进程<br><code>kill -s 9 [pid]</code></p>
+<ol start="5">
+<li>supervisor 进程控制管理</li>
+</ol>
+<h2 id="docker里安装ubuntu，ubuntu里再安装docker"><a href="#docker里安装ubuntu，ubuntu里再安装docker" class="headerlink" title="docker里安装ubuntu，ubuntu里再安装docker"></a>docker里安装ubuntu，ubuntu里再安装docker</h2><ol>
+<li><code>docker pull ubuntu</code></li>
+<li><code>docker run -it -d --privileged --name xxx ubuntu</code></li>
+<li><code>docker exec -it xxx /bin/bash</code></li>
+<li><code>apt-get update</code></li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">apt-get -y install \</span><br><span class="line">    apt-transport-https \</span><br><span class="line">    ca-certificates \</span><br><span class="line">    curl \</span><br><span class="line">    software-properties-common \</span><br><span class="line">    net-tools \</span><br><span class="line">    iptables</span><br></pre></td></tr></table></figure></li>
+<li><code>curl -fsSL get.docker.com -o get-docker.sh</code></li>
+<li><code>sh get-docker.sh --mirror Aliyun</code></li>
+</ol>
+</div></article></div></main><footer><div class="paginator"><a href="/2019/06/21/dva/" class="prev">上一篇</a><a href="/2018/10/15/node_support_es6/" class="next">下一篇</a></div><div class="copyright"><p>© 2015 - 2020 <a href="http://yoursite.com">Leon</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>

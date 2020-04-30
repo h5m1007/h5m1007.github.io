@@ -1,0 +1,73 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> react 回忆录二 · Leooon Blog</title><meta name="description" content="react 回忆录二 - Leon"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://yoursite.com/atom.xml" title="Leooon Blog"><meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Leooon Blog" type="application/atom+xml">
+</head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/sunchongsheng" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/pinggod" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">react 回忆录二</h1><div class="post-info">Nov 11, 2016</div><div class="post-content"><p>革命性创新 性能出众 代码逻辑灰常简单的 React</p>
+<h2 id="什么是Redux"><a href="#什么是Redux" class="headerlink" title="什么是Redux"></a>什么是Redux</h2><p>本身为一种架构，将Flux与函数式编程结合在一起</p>
+<h2 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h2><ol>
+<li>用户使用方式复杂</li>
+<li><strong>不同身份</strong>用户拥有<em>不同使用方式</em></li>
+<li>多用户间可<strong>协作</strong></li>
+<li>与<em>服务器<em>大量交互，亦或使用</em>WebSocket</em></li>
+<li>View需从<strong>多个来源</strong>获取数据</li>
+<li>某组件的<em>状态</em>需<strong>共享</strong></li>
+<li>某状态需在<em>任何地方</em>都可拿到</li>
+<li>单个组件需改变<strong>全局状态</strong></li>
+<li>一个组件需改变<em>另一个</em>组件状态</li>
+</ol>
+<h2 id="设计思想"><a href="#设计思想" class="headerlink" title="设计思想"></a>设计思想</h2><ul>
+<li>Web App是一个状态机，视图和状态是一一对应的</li>
+<li>所有状态保存至一个对象里面</li>
+</ul>
+<h2 id="API"><a href="#API" class="headerlink" title="API"></a>API</h2><h3 id="Store"><a href="#Store" class="headerlink" title="Store"></a>Store</h3><p>用来保存所有数据的容器，整个App只能有一个，由 <code>createStore(fn)</code> 来生成，接受一个Reducer函数作为参数，即后面所说到的Reducer，一个用来根据Action的不同而生成此刻的State快照的函数  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import &#123; createStore &#125; from &#39;redux&#39;;</span><br><span class="line">const store &#x3D; createStore(fn);</span><br></pre></td></tr></table></figure>
+
+<h3 id="State"><a href="#State" class="headerlink" title="State"></a>State</h3><p>当想从Store里获得<strong>某时间点</strong>的数据，可对Store生成快照，而这种时间点下的数据集合称为<strong>State</strong>  </p>
+<p>而state储存在一棵对象树state tree中，且这棵树只存在于唯一的store中  </p>
+<p>当前时刻的State可由 <code>store.getState()</code> 获得  </p>
+<p>State与View一一对应，即State相同View就相同  </p>
+<p>State本身是<strong>只读</strong>的，而改变它的方法就是触发action  </p>
+<h3 id="Action"><a href="#Action" class="headerlink" title="Action"></a>Action</h3><p>本身为一个描述已发生事件的对象，接受的属性有<strong>type</strong>(必选 表示Action名称)和其它自定义属性  </p>
+<p>因State的变化需由View来导致，而Action为View发出的<strong>通知</strong>，告诉State应有所变化了  </p>
+<p>Action描述当前所发生的事情，它是改变State的唯一办法，它会运送数据至Store  </p>
+<p>Action是把数据从应用传到store的有效载荷，是store数据的唯一来源，一般经 <code>store.dispatch()</code> 传action到store  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const action &#x3D; &#123;</span><br><span class="line">    type: &#39;ADD_TODO&#39;, &#x2F;&#x2F; 名称</span><br><span class="line">    payload: &#39;Learn Redux&#39; &#x2F;&#x2F; 携带信息</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>可封装一个生成Action的函数，只需提供Action的名称即可  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; Action Creator</span><br><span class="line">const ADD_TODO &#x3D; &#39;添加 TODO&#39;;</span><br><span class="line">function addTodo(text)&#123;</span><br><span class="line">    return &#123;</span><br><span class="line">        tyep: ADD_TODO,</span><br><span class="line">        text</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">const action &#x3D; addTodo(&#39;Learn Redux&#39;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="dispatch"><a href="#dispatch" class="headerlink" title="dispatch()"></a>dispatch()</h4><p><code>store.dispatch()</code>  是View发出Action的唯一办法，接受Action对象作为参数  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import &#123; createStore &#125; from &#39;redux&#39;;</span><br><span class="line">const store &#x3D; createStore(fn);</span><br><span class="line">store.dispatch(addTodo(&#39;Learn redux&#39;));</span><br></pre></td></tr></table></figure>
+
+<h4 id="Reducer"><a href="#Reducer" class="headerlink" title="Reducer"></a>Reducer</h4><p>当Store收到Action时，Store需给出一个新的State快照，从而View才会变化，整个一个过程称为Reducer，它接受Action和此刻的State快照作为参数，并返回一个新的State  </p>
+<p>即 <code>(previousState, action) =&gt; newState</code>  </p>
+<p>简单来说，就是为了描述action是如何改变state tree的  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">const defaultState &#x3D; 0;</span><br><span class="line">const reducer &#x3D; (state &#x3D; defaultState, action) &#x3D;&gt; &#123;</span><br><span class="line">    switch (action.type) &#123;</span><br><span class="line">        case &#39;ADD&#39;:</span><br><span class="line">            return state + action.payload;</span><br><span class="line">        default:</span><br><span class="line">            return state;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">const state &#x3D; reducer(1, &#123;</span><br><span class="line">    type: &#39;ADD&#39;,</span><br><span class="line">    payload: 2</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>这里的Reducer需手动调用，而当把它作为参数传入 <code>createStore(reducer)</code>，可实现每当 <code>store.dispatch()</code> 发来一个新Action时，自动调用Reducer并得到新State  </p>
+<h5 id="Reducer拆分"><a href="#Reducer拆分" class="headerlink" title="Reducer拆分"></a>Reducer拆分</h5><p>面对所有reducers最终只会生成唯一的state对象，这意味着该state包含所有数据，导致本身体积十分庞大，进而有了对reducers的拆分  </p>
+<p>拆分后，单独的reducer可独立操作state tree中某个state，可控制它们被调用的顺序，传入附加数据，编写可复用的reducer来处理一些通用任务  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">const chatReducer &#x3D; (state &#x3D; defaultState, action &#x3D; &#123;&#125;) &#x3D;&gt; &#123;</span><br><span class="line">    &#x2F;*</span><br><span class="line">     * 假设 action &#x3D; &#123;type: &#39;add&#39;, payload: &#39;str&#39;&#125;;</span><br><span class="line">     * 则声明 const &#123; type, payload &#125; &#x3D; action;</span><br><span class="line">     * 调用type返回&#39;add&#39;，调用payload返回&#39;str&#39;</span><br><span class="line">     *&#x2F;</span><br><span class="line">    const &#123; type, payload &#125; &#x3D; action; &#x2F;&#x2F; 解构赋值</span><br><span class="line">    switch(type)&#123;</span><br><span class="line">        case &#39;ADD_CHAT&#39;:</span><br><span class="line">            return Object.assign(&#123;&#125;, state, &#123;</span><br><span class="line">                    &#x2F;&#x2F; Object.assign(&#123;&#125;, &#123;&#125;, ...) 合并多个对象</span><br><span class="line">                    &#x2F;&#x2F; 遇相同属性时 位于后面的属性覆盖前面的</span><br><span class="line">                    chatLog: state.chatLog.concat(payload) &#x2F;&#x2F; str.concat(str) 拼接指定字符串</span><br><span class="line">                &#125;);</span><br><span class="line">        case &#39;CHANGE_STATUS&#39;:</span><br><span class="line">            return Object.assign(&#123;&#125;, state, &#123;</span><br><span class="line">                    statusMessage: payload</span><br><span class="line">                &#125;);</span><br><span class="line">        default:</span><br><span class="line">            return state;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可看出上述代码，有两种Action分别改变State的两个属性  </p>
+<ul>
+<li>ADD_CHAT =&gt; chatLog属性</li>
+<li>CHANGE_STATUS =&gt; statusMessage属性</li>
+</ul>
+<p>把上述各个reducer进行拆分  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 主reducer</span><br><span class="line">const chatReducer &#x3D; (state &#x3D; defaultState, action &#x3D; &#123;&#125;) &#x3D;&gt; &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">        &#x2F;&#x2F; 子reducer</span><br><span class="line">        chatLog: chatLog(state.chatLog, action),</span><br><span class="line">        statusMessage: statusMessage(state.statusMessage, action)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>每个子reducer分别处理全局state中的一部分，各自的state参数都是不同的，分别对应它管理的那部分state数据  </p>
+<p>再由 <code>combineReducers()</code> 来合并reducer成一个大的Reducer  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">import &#123; combineReducers &#125; from &#39;redux&#39;;</span><br><span class="line">const chatReducer &#x3D; combineReducers(&#123;</span><br><span class="line">    chatLog,</span><br><span class="line">    statusMessage</span><br><span class="line">&#125;)</span><br><span class="line">export default todoApp;</span><br></pre></td></tr></table></figure>
+
+<h5 id="reduce"><a href="#reduce" class="headerlink" title="reduce()"></a>reduce()</h5><p>当一组actions为数组时，存储着多个Action对象，此时可调用 <code>actions.reduce(reducer, 0)</code> ，reducer作为参数，这样可实现同时处理一个actions数组的Action对象，并得到最终结果  </p>
+<h4 id="subscribe"><a href="#subscribe" class="headerlink" title="subscribe()"></a>subscribe()</h4><p><code>store.subscribe(listener)</code>  Store设置监听函数，可实现一旦store的快照state发生变化后，就会自动执行这个函数  </p>
+<p>用于把组件的render方法亦或setState方法作为listener监听对象，state变化的同时自动渲染View页面  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let unsubscribe &#x3D; store.subscribe(() &#x3D;&gt; &#123;</span><br><span class="line">    console.log(store.getState());</span><br><span class="line">&#125;);</span><br><span class="line">unsubscribe(); &#x2F;&#x2F;直接调用能解除监听</span><br></pre></td></tr></table></figure>
+
+<h2 id="Redux工作流程"><a href="#Redux工作流程" class="headerlink" title="Redux工作流程"></a>Redux工作流程</h2><p><img src="http://img.blog.csdn.net/20151210233944838" alt="结构图1"></p>
+<p><img src="http://img.blog.csdn.net/20151210234529139" alt="结构图2"></p>
+<ol>
+<li>用户与View交互发出Action</li>
+<li><code>store.dispatch(Reducer(state, action))</code> store经 <code>store.dispatch()</code> 向View发送state，而Action和此刻state作为参数传入Reducer，Reducer处理后返回新的state，发送给View</li>
+<li>一旦State有新变化，Store调用监听 <code>store.subscribe(listener)</code> ，侦听器listener可能是 <code>store.getState()</code> 获取此刻新state，亦或通知经组件state有变化渲染View</li>
+</ol>
+</div></article></div></main><footer><div class="paginator"><a href="/2016/11/17/weixin_small_app/" class="prev">上一篇</a><a href="/2016/11/05/prepare-resume-record/" class="next">下一篇</a></div><div class="copyright"><p>© 2015 - 2020 <a href="http://yoursite.com">Leon</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>

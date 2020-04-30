@@ -1,0 +1,102 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> HTML5和CSS3实例教程 学习笔记 · Leooon Blog</title><meta name="description" content="HTML5和CSS3实例教程 学习笔记 - Leon"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://yoursite.com/atom.xml" title="Leooon Blog"><meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Leooon Blog" type="application/atom+xml">
+</head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/sunchongsheng" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/pinggod" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">HTML5和CSS3实例教程 学习笔记</h1><div class="post-info">Sep 15, 2016</div><div class="post-content"><p>《HTML5 and CSS3》译名《HTML5和CSS3实例教程》</p>
+<h2 id="H5新标签"><a href="#H5新标签" class="headerlink" title="H5新标签"></a>H5新标签</h2><ul>
+<li><code>&lt;header&gt;</code>  页面头部</li>
+<li><code>&lt;footer&gt;</code>  页面尾部</li>
+<li><code>&lt;nav&gt;</code>  页面导航</li>
+<li><code>&lt;section&gt;</code>  页面逻辑区域或内容组合，对内容进行归类分组，如侧边栏</li>
+<li><code>&lt;article&gt;</code>  页面中一篇完整内容，对具体内容的描述</li>
+<li><code>&lt;aside&gt;</code>  页面补充或相关内容，如旁白、引言、图表、相关链接</li>
+<li><code>&lt;meter&gt;</code>  进度条固定值</li>
+<li><code>&lt;progress&gt;</code>  进度条动态值</li>
+</ul>
+<h3 id="自定义属性"><a href="#自定义属性" class="headerlink" title="自定义属性"></a>自定义属性</h3><ul>
+<li>data-attr  </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href&#x3D;&quot;#&quot; data-width&#x3D;&quot;600&quot; data-height&#x3D;&quot;400&quot; class&#x3D;&quot;popup&quot;&gt;News&lt;&#x2F;a&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    (function()&#123;</span><br><span class="line">      var popup &#x3D; document.getElementsByClassName(&#39;popup&#39;)[0];</span><br><span class="line">      var popupW &#x3D; popup.getAttribute(&#39;data-width&#39;);</span><br><span class="line">      var popupH &#x3D; popup.getAttribute(&#39;data-height&#39;);</span><br><span class="line">      popup.onclick &#x3D; function(e)&#123;</span><br><span class="line">        e &#x3D; e || window.event;</span><br><span class="line">        e.preventDefault();</span><br><span class="line">        window.open(this.href, &#39;popup&#39;, &quot;width&#x3D;&quot; + popupW + &quot;, height&#x3D;&quot; + popupH);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)();</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>表单新特性  </li>
+</ul>
+<p>input标签新类型type有：  </p>
+<ol>
+<li>range创建滑块，属性值有min和max  </li>
+<li>number在原有属性值上增加min和max设置上下限，页面显示有上下箭头  </li>
+<li>date创建日期控件</li>
+<li>email让不同客户端在输入email时，显示的键盘输入有所区别  </li>
+<li>url同上  </li>
+<li>color创建颜色选择器</li>
+</ol>
+<p>input新属性：  </p>
+<ol>
+<li>autofocus设置后，页面刷新进入自动获得焦点  </li>
+<li>autocomplete = “off” 设置后，会取消某些浏览器自动为表单填充数据  </li>
+<li>contenteditable = “true” 设置后，会让任何元素变为可编辑状态  </li>
+</ol>
+<h2 id="CSS3"><a href="#CSS3" class="headerlink" title="CSS3"></a>CSS3</h2><ul>
+<li><code>ele:nth-of-type(参数){}</code>  作用于指定特定标签ele，可带参数有：  </li>
+</ul>
+<ol>
+<li>表示奇偶数 even odd  </li>
+<li>表示倍数 n 2n 3n …</li>
+<li>表示偏移 n+1 n+2 n+3 …</li>
+</ol>
+<ul>
+<li><p><code>ele:nth-child(参数){}</code>  遍历标签ele的子元素，可带参数同上  </p>
+</li>
+<li><p><code>ele:last-child{}</code>  定位标签ele最后一个子元素  </p>
+</li>
+<li><p><code>ele:first-child{}</code>  定位标签ele第一个子元素  </p>
+</li>
+<li><p><code>ele:nth-last-child(参数){}</code>  从标签ele最后一个子元素<strong>往前</strong>遍历，可带参数同上  </p>
+</li>
+<li><p>ele:after{ content:; }  在标签ele后追加内容但不占html  </p>
+</li>
+</ul>
+<h2 id="增强可访问性"><a href="#增强可访问性" class="headerlink" title="增强可访问性"></a>增强可访问性</h2><p>主要针对有朗读功能的屏幕阅读器  </p>
+<ul>
+<li>新增属性  </li>
+</ul>
+<ol>
+<li>role属性  向阅读器说明某元素用途  </li>
+<li>aria-live  标识一个可能会被ajax自动更新的区域  </li>
+<li>1 aria-live=”polite” 则会在阅读完前面内容后接着阅读更新的内容  </li>
+<li>2 aria-live=”assertive” 则会停止当前内容直接阅读更新的内容</li>
+<li>aria-atomic  标识某动态区域的阅读方式  </li>
+<li>1 aria-atomic=”true” 让朗读已变化区域的<strong>全部内容</strong>  </li>
+<li>2 aria-atomic=”false” 仅让朗读已变化区域的<strong>节点内容</strong>，如列表项</li>
+</ol>
+<h2 id="canvas绘画"><a href="#canvas绘画" class="headerlink" title="canvas绘画"></a>canvas绘画</h2><p><code>&lt;canvas&gt;&lt;/canvas&gt;</code> 由canvas标签创建绘画画板，经js来绘制，css不起作用  </p>
+<ul>
+<li><code>var context = canvas.getContext(&#39;2d&#39;)</code>  得到绘制2d图形的画布  </li>
+<li><code>context.fillStyle = &quot;#fff&quot;</code>  声明绘画填充颜色  </li>
+<li><code>context.strokeStyle = &quot;#fff&quot;</code>  声明绘画画笔颜色  </li>
+<li>绘制线条  </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">context.lineWidth &#x3D; 2;</span><br><span class="line">context.beginPath(); &#x2F;&#x2F; 开启路径</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 绘制点，任何一条画线都从这点出发</span><br><span class="line">context.moveTo(0, 40); </span><br><span class="line"></span><br><span class="line">context.lineTo(30, 0);</span><br><span class="line">context.lineTo(60, 40);</span><br><span class="line">context.lineTo(285, 40);</span><br><span class="line">context.stroke(); &#x2F;&#x2F; 结束绘画</span><br><span class="line">context.closePath(); &#x2F;&#x2F; 关闭路径</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>绘制文字  </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">context.font &#x3D; &#39;italic 40px sans-serif&#39;;</span><br><span class="line">context.textBaseline &#x3D; &#39;top&#39;; &#x2F;&#x2F; 声明文字起始基线</span><br><span class="line">context.fillText(&#39;AwesomeCo&#39;, 60, 0) &#x2F;&#x2F; 声明文字内容和绘制开始位置(60, 0)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><code>context.translate(20, 20)</code>  // 转移绘制绘制起始点(开始是原点(0, 0))  </p>
+</li>
+<li><p><code>context.fillRect(0, 0, 20, 20)</code>  // 在(0, 0)处绘制20*20的矩形  </p>
+</li>
+<li><p><code>context.fill()</code>  // 进行填充图形</p>
+</li>
+</ul>
+<h2 id="H5多媒体"><a href="#H5多媒体" class="headerlink" title="H5多媒体"></a>H5多媒体</h2><ul>
+<li><code>&lt;audio&gt;</code>  放置音频标签，应用代码如下：  </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;audio controls&gt;</span><br><span class="line">  &lt;source type&#x3D;&quot;audio&#x2F;ogg&quot; src&#x3D;&quot;xxx.ogg&quot;&gt;</span><br><span class="line">  &lt;source type&#x3D;&quot;audio&#x2F;mpeg&quot; src&#x3D;&quot;xxx.mp3&quot;&gt;</span><br><span class="line">  &lt;a href&#x3D;&quot;xxx.mp3&quot;&gt;Download xxx.mp3&lt;&#x2F;a&gt;</span><br><span class="line">&lt;&#x2F;audio&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>&lt;video&gt;</code>  放置视频标签，应用代码如下：  </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;video controls&gt;</span><br><span class="line">  &lt;source src&#x3D;&quot;xxx.mp4&quot;&gt;</span><br><span class="line">  &lt;source src&#x3D;&quot;xxx.ogv&quot;&gt;</span><br><span class="line">  &lt;p&gt;Your browser does not support the video tag.&lt;&#x2F;p&gt;</span><br><span class="line">&lt;&#x2F;video&gt;</span><br></pre></td></tr></table></figure>
+
+
+</div></article></div></main><footer><div class="paginator"><a href="/2016/09/21/learn-from-css/" class="prev">上一篇</a><a href="/2016/09/11/front-end-engineering/" class="next">下一篇</a></div><div class="copyright"><p>© 2015 - 2020 <a href="http://yoursite.com">Leon</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>
