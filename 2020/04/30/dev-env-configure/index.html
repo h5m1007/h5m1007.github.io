@@ -25,6 +25,7 @@
 
 <p>  修改 brew_install.sh 文件，更换里面的镜像源  </p>
 <p>  <code>BREW_REPO = &quot;https://github.com/Homebrew/brew”</code><br>  ==&gt;<br>  <code>BREW_REPO=&quot;https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git”</code></p>
+<p>  <img src="https://cdn.jsdelivr.net/gh/h5m1007/cloud-image@master/images/20200502172342.png" alt="修改 brew 镜像源"></p>
 <p>  再执行 brew_install.sh 文件，不出意外，<code>brew -v</code> 显示版本号即安装完毕。</p>
 <p>  <strong>pip</strong>：pip 是 python 包管理工具，系统默认自带的 python2.7 安装包里 easy_install.py 是默认安装的，而 pip 需另外安装</p>
   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#使用国内镜像源：https://pypi.tuna.tsinghua.edu.cn/simple/</span></span><br><span class="line">sudo easy_install -i https://pypi.tuna.tsinghua.edu.cn/simple/ pip</span><br></pre></td></tr></table></figure>
@@ -35,8 +36,10 @@
 <p>  查询以下两域名相对本地网络的 <a href="https://www.ipaddress.com" target="_blank" rel="noopener">IP 地址</a> ( 每个人查询到的可能不一 )</p>
   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">github.global.ssl.fastly.net</span><br><span class="line"></span><br><span class="line">github.com</span><br></pre></td></tr></table></figure>
 
+<p>  <img src="https://cdn.jsdelivr.net/gh/h5m1007/cloud-image@master/images/20200502172728.png" alt="github.global.ssl.fastly.net"></p>
+<p>  <img src="https://cdn.jsdelivr.net/gh/h5m1007/cloud-image@master/images/20200502173014.png" alt="github.com"></p>
 <p>  假设查询到的 IP 地址是：  </p>
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">140.82.114.4 github.com</span><br><span class="line">199.232.69.194 github.global.ssl.fastly.net</span><br></pre></td></tr></table></figure>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">140.82.113.4 github.com</span><br><span class="line">199.232.69.194 github.global.ssl.fastly.net</span><br></pre></td></tr></table></figure>
 
 <p>  写入 <code>/etc/hosts</code> 文件末尾追加</p>
   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/hosts</span><br></pre></td></tr></table></figure>
@@ -60,11 +63,16 @@
 <p>  每次使用 brew 安装软件时，都需要手动加载代理，想方便的换也可把 <code>export ALL_PROXY=socks5://127.0.0.1:1086</code> 写入 <code>~/.zshrc</code> 终端配置文件里，但不建议这样做，因为可能会影响其它工具的使用。</p>
 </li>
 <li><p>Node</p>
-<p>每次使用 brew 安装软件时，都需要手动加载代理，想方便的换也可把 <code>export ALL_PROXY=socks5://127.0.0.1:1086</code> 写入 <code>~/.zshrc</code> 终端配置文件里，但不建议这样做，因为可能会影响其它工具的使用。</p>
-</li>
-<li><p>Python pip</p>
+<p>  建议直接使用 nvm Node版本管理软件，使用官方下载安装方式</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash</span><br></pre></td></tr></table></figure>
+
+<p>  下载安装完成后，修改 <code>~/.zshrc</code> 终端配置文件里，往后继续追加</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 启动终端时调用 nvm 执行文件</span></span><br><span class="line"><span class="built_in">export</span> NVM_DIR=<span class="string">"<span class="variable">$([ -z "$&#123;XDG_CONFIG_HOME-&#125;" ] &amp;&amp; printf %s "$&#123;HOME&#125;/.nvm" || printf %s "$&#123;XDG_CONFIG_HOME&#125;/nvm")</span>"</span>[ -s <span class="string">"<span class="variable">$NVM_DIR</span>/nvm.sh"</span> ] &amp;&amp; \. <span class="string">"<span class="variable">$NVM_DIR</span>/nvm.sh"</span></span><br></pre></td></tr></table></figure>
+
+<p>  <img src="https://cdn.jsdelivr.net/gh/h5m1007/cloud-image@master/images/20200502173809.png" alt="nvm"></p>
+<p>  重启终端，<code>nvm install 12.16.3</code>，安装制定版本 node。</p>
 </li>
 </ul>
 </li>
 </ol>
-</div></article></div></main><footer><div class="paginator"><a href="/2020/04/30/best-terminal-configure/" class="prev">PREV</a><a href="/2020/04/17/learn-from-optimize/" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2020 <a href="http://yoursite.com">Leon</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>
+</div></article></div></main><footer><div class="paginator"><a href="/2020/04/30/best-terminal-configure/" class="prev">上一篇</a><a href="/2020/04/17/learn-from-optimize/" class="next">下一篇</a></div><div class="copyright"><p>© 2015 - 2020 <a href="http://yoursite.com">Leon</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>
