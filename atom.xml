@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://h5m1007.github.io/"/>
-  <updated>2020-05-10T07:40:28.602Z</updated>
+  <updated>2020-05-11T02:52:24.775Z</updated>
   <id>https://h5m1007.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="https://h5m1007.github.io/2020/05/10/learn-from-vue/"/>
     <id>https://h5m1007.github.io/2020/05/10/learn-from-vue/</id>
     <published>2020-05-10T07:20:30.000Z</published>
-    <updated>2020-05-10T07:40:28.602Z</updated>
+    <updated>2020-05-11T02:52:24.775Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="生命周期函数"><a href="#生命周期函数" class="headerlink" title="生命周期函数"></a>生命周期函数</h2><p>8个周期阶段，分别为：创建前/后、载入前/后、更新前/后、销毁前/后。</p><ul><li>beforeCreate: 还未有 Vue 实例的挂载对象 el；</li><li>created: 已有数据观测、属性/方法运算、watch/事件监听回调；</li><li>beforeMount: 已初始化 Vue 实例对象的 $el, data，还是虚拟 Dom 节点；</li><li>mounted: 已挂载 Vue 实例对象，虚拟 Dom 代替了文档的 el 位置；</li><li>beforeUpdate/updated: 当 data 发生变化，会调用 beforeUpdate/updated 两周期函数；</li><li>beforeDestroy/destroyed: 当调用 destroy 方法后，data 的变化不再调用所有的周期函数，此时的 Vue 已解除事件监听以及对 Dom 的绑定，但 Dom 结构依旧存在；</li></ul>]]></content>
+    <content type="html"><![CDATA[<h2 id="生命周期函数"><a href="#生命周期函数" class="headerlink" title="生命周期函数"></a>生命周期函数</h2><p>8个周期阶段，分别为：创建前/后、载入前/后、更新前/后、销毁前/后。</p><ul><li>beforeCreate: 还未有 Vue 实例的挂载对象 el；</li><li>created: 已有数据观测、属性/方法运算、watch/事件监听回调；</li><li>beforeMount: 已初始化 Vue 实例对象的 $el, data，还是虚拟 Dom 节点；</li><li>mounted: 已挂载 Vue 实例对象，虚拟 Dom 代替了文档的 el 位置；</li><li>beforeUpdate/updated: 当 data 发生变化，会调用 beforeUpdate/updated 两周期函数；</li><li>beforeDestroy/destroyed: 当调用 destroy 方法后，data 的变化不再调用所有的周期函数，此时的 Vue 已解除事件监听以及对 Dom 的绑定，但 Dom 结构依旧存在；</li></ul><h2 id="Vue-的优势"><a href="#Vue-的优势" class="headerlink" title="Vue 的优势"></a>Vue 的优势</h2><ul><li>低耦合：View 可独立于 Model 变化和修改，一个 ViewModel 可绑定到不同的 View 上，View 变化时 Model 可不变，Model 变化时 View 也可不变；</li><li>可重用性：可把一些视图逻辑写在 ViewModel，让更多地 View 去重用这些视图逻辑；</li><li>独立开发：开发者可更专注于业务逻辑和数据的开发；</li><li>可测试：针对 ViewModel 编写测试用例；</li></ul>]]></content>
     
     <summary type="html">
     
