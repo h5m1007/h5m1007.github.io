@@ -14,6 +14,14 @@
 <li>独立开发：开发者可更专注于业务逻辑和数据的开发；</li>
 <li>可测试：针对 ViewModel 编写测试用例；</li>
 </ul>
+<h2 id="Vue-双向绑定原理"><a href="#Vue-双向绑定原理" class="headerlink" title="Vue 双向绑定原理"></a>Vue 双向绑定原理</h2><ul>
+<li>VueJS采用数据劫持结合订阅者-发布者模式的方式，通过 <code>Object.definedProperty</code> 对各个属性的 <code>setter</code>、<code>getter</code> 进行代理劫持，当数据变动时，发布消息给订阅者，并触发相应的监听回调。</li>
+</ul>
+<h2 id="Vuex-的原理"><a href="#Vuex-的原理" class="headerlink" title="Vuex 的原理"></a>Vuex 的原理</h2><ul>
+<li>Vuex 仅作为 Vue 的一个插件存在，不像 Redux 等状态管理库能用于其它框架之上，而 Vuex 只能在 Vue 上使用，最大程度上是因为其高度依赖于 Vue 的 Computed 依赖监测系统以及其插件系统。</li>
+<li>Vuex 的思想诞生于 Flux，而其实现方式又完完全全使用 Vue 的响应式设计，依赖监听、收集都属于 Vue 对对象各个属性的代理劫持。</li>
+<li>Vuex 的 store 其本质是没有 template 的隐藏着的 Vue 组件。</li>
+</ul>
 <h2 id="Vuex-核心属性"><a href="#Vuex-核心属性" class="headerlink" title="Vuex 核心属性"></a>Vuex 核心属性</h2><p>共同5个属性，分别为 state、getter、mutation、action、module。</p>
 <h3 id="Vuex-的-store-特性"><a href="#Vuex-的-store-特性" class="headerlink" title="Vuex 的 store 特性"></a>Vuex 的 store 特性</h3><ul>
 <li>store 如同一个仓库，里面有多个对象，其中 state 是数据源的存放地，类似于 Vue 对象的 data；</li>
