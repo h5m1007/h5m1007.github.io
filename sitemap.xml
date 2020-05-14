@@ -2,9 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://h5m1007.github.io/2020/05/12/learn-from-react/</loc>
+    <loc>https://h5m1007.github.io/2019/11/12/learn-from-react/</loc>
     
-    <lastmod>2020-05-13T03:14:55.201Z</lastmod>
+    <lastmod>2020-05-14T02:03:39.932Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://h5m1007.github.io/2019/12/10/learn-from-vue/</loc>
+    
+    <lastmod>2020-05-14T02:03:32.042Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://h5m1007.github.io/2019/06/21/dva/</loc>
+    
+    <lastmod>2020-05-13T03:39:16.478Z</lastmod>
     
   </url>
   
@@ -12,13 +26,6 @@
     <loc>https://h5m1007.github.io/2019/06/27/knowledge-combing/</loc>
     
     <lastmod>2020-05-12T14:37:37.443Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://h5m1007.github.io/2020/05/10/learn-from-vue/</loc>
-    
-    <lastmod>2020-05-12T02:40:40.641Z</lastmod>
     
   </url>
   
@@ -66,13 +73,6 @@
   
   <url>
     <loc>https://h5m1007.github.io/2019/06/21/docker/</loc>
-    
-    <lastmod>2020-04-30T06:38:46.783Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://h5m1007.github.io/2019/06/21/dva/</loc>
     
     <lastmod>2020-04-30T06:38:46.783Z</lastmod>
     

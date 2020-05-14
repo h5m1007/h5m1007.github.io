@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://h5m1007.github.io/"/>
-  <updated>2020-05-13T03:14:55.201Z</updated>
+  <updated>2020-05-07T06:59:43.151Z</updated>
   <id>https://h5m1007.github.io/</id>
   
   <author>
@@ -15,55 +15,6 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>React 一些概念</title>
-    <link href="https://h5m1007.github.io/2020/05/12/learn-from-react/"/>
-    <id>https://h5m1007.github.io/2020/05/12/learn-from-react/</id>
-    <published>2020-05-12T02:42:28.000Z</published>
-    <updated>2020-05-13T03:14:55.201Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="HOC"><a href="#HOC" class="headerlink" title="HOC"></a>HOC</h2><ul><li>一种模式，HOC本身为纯函数，没有任何副作用。</li></ul><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">withOperation</span>(<span class="params">wrappedComponent, <span class="regexp">/*els*/</span></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        &lt;wrappedComponent /&gt;</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ul><li>不要直接修改其传入的组件，内部使用并返回新的 class 包裹下传入的组件</li></ul><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">withOperation</span>(<span class="params">wrappedComponent</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="class"><span class="keyword">class</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">        render() &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">wrappedComponent</span> /&gt;</span></span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="React-memo"><a href="#React-memo" class="headerlink" title="React.memo"></a>React.memo</h2><ul><li>使用时机：当相同的 props 输入，得到相同的渲染结果时使用；</li><li>实现方式：通过记忆组件渲染结果的方式来提高组件的性能表现；</li><li>表现：跳过渲染组件的操作并直接复用最近一次渲染结果；</li></ul><h2 id="虚拟-Dom-vdom-提高性能"><a href="#虚拟-Dom-vdom-提高性能" class="headerlink" title="虚拟 Dom (vdom) 提高性能"></a>虚拟 Dom (vdom) 提高性能</h2><ul><li>vdom 相当于是 JS 与 真实 Dom 之间的一层缓存，利用 Dom Diff 算法规避了一些没必要的 Dom 操作，从而提高了性能；</li><li>用 JavaScript 对象结构来表示 Dom 树的结构，用这棵树来构建一个真正的 Dom 树，插入文档中。</li><li>当状态变更时，重新构建一棵新的对象树，对比新旧两课树的差异，记录差异构建真正的 Dom 树，从而更新视图；</li></ul><h2 id="Dom-Diff-原理"><a href="#Dom-Diff-原理" class="headerlink" title="Dom Diff 原理"></a>Dom Diff 原理</h2><ul><li>把树形结构按层级分解，只比较同级元素；</li><li>给列表结构的每个单元添加唯一的 key 属性，方便比较；</li><li>React 只匹配相同 Class 的 Component；</li><li>合并操作，当 Component 调用 setState 方法时，React 会标记为 Dirty，到每个事件循环结束后，React 会检查每个标记为 Dirty 的 Component，并重新绘制；</li><li>选择性子树渲染，开发者可重写 shouldComponentUpdate 来提高 Diff 性能；</li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;HOC&quot;&gt;&lt;a href=&quot;#HOC&quot; class=&quot;headerlink&quot; title=&quot;HOC&quot;&gt;&lt;/a&gt;HOC&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;一种模式，HOC本身为纯函数，没有任何副作用。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;figure class=&quot;highlight 
-      
-    
-    </summary>
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>VueJS 一些概念</title>
-    <link href="https://h5m1007.github.io/2020/05/10/learn-from-vue/"/>
-    <id>https://h5m1007.github.io/2020/05/10/learn-from-vue/</id>
-    <published>2020-05-10T07:20:30.000Z</published>
-    <updated>2020-05-12T02:40:40.641Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="生命周期函数"><a href="#生命周期函数" class="headerlink" title="生命周期函数"></a>生命周期函数</h2><p>8个周期阶段，分别为：创建前/后、载入前/后、更新前/后、销毁前/后。</p><ul><li>beforeCreate: 还未有 Vue 实例的挂载对象 el；</li><li>created: 已有数据观测、属性/方法运算、watch/事件监听回调；</li><li>beforeMount: 已初始化 Vue 实例对象的 $el, data，还是虚拟 Dom 节点；</li><li>mounted: 已挂载 Vue 实例对象，虚拟 Dom 代替了文档的 el 位置；</li><li>beforeUpdate/updated: 当 data 发生变化，会调用 beforeUpdate/updated 两周期函数；</li><li>beforeDestroy/destroyed: 当调用 destroy 方法后，data 的变化不再调用所有的周期函数，此时的 Vue 已解除事件监听以及对 Dom 的绑定，但 Dom 结构依旧存在；</li></ul><h2 id="Vue-的优势"><a href="#Vue-的优势" class="headerlink" title="Vue 的优势"></a>Vue 的优势</h2><ul><li>低耦合：View 可独立于 Model 变化和修改，一个 ViewModel 可绑定到不同的 View 上，View 变化时 Model 可不变，Model 变化时 View 也可不变；</li><li>可重用性：可把一些视图逻辑写在 ViewModel，让更多地 View 去重用这些视图逻辑；</li><li>独立开发：开发者可更专注于业务逻辑和数据的开发；</li><li>可测试：针对 ViewModel 编写测试用例；</li></ul><h2 id="Vue-双向绑定原理"><a href="#Vue-双向绑定原理" class="headerlink" title="Vue 双向绑定原理"></a>Vue 双向绑定原理</h2><ul><li>VueJS采用数据劫持结合订阅者-发布者模式的方式，通过 <code>Object.definedProperty</code> 对各个属性的 <code>setter</code>、<code>getter</code> 进行代理劫持，当数据变动时，发布消息给订阅者，并触发相应的监听回调。</li></ul><h2 id="Vuex-的原理"><a href="#Vuex-的原理" class="headerlink" title="Vuex 的原理"></a>Vuex 的原理</h2><ul><li>Vuex 仅作为 Vue 的一个插件存在，不像 Redux 等状态管理库能用于其它框架之上，而 Vuex 只能在 Vue 上使用，最大程度上是因为其高度依赖于 Vue 的 Computed 依赖监测系统以及其插件系统。</li><li>Vuex 的思想诞生于 Flux，而其实现方式又完完全全使用 Vue 的响应式设计，依赖监听、收集都属于 Vue 对对象各个属性的代理劫持。</li><li>Vuex 的 store 其本质是没有 template 的隐藏着的 Vue 组件。</li></ul><h2 id="Vuex-核心属性"><a href="#Vuex-核心属性" class="headerlink" title="Vuex 核心属性"></a>Vuex 核心属性</h2><p>共同5个属性，分别为 state、getter、mutation、action、module。</p><h3 id="Vuex-的-store-特性"><a href="#Vuex-的-store-特性" class="headerlink" title="Vuex 的 store 特性"></a>Vuex 的 store 特性</h3><ul><li>store 如同一个仓库，里面有多个对象，其中 state 是数据源的存放地，类似于 Vue 对象的 data；</li><li>存放在 state 的数据是响应式的，一个组件往 store 取数据，store 里的数据一旦变化，依赖这数据的组件也会随之更新；</li><li>store 是通过 mapState 把 state 和 getters 映射到当前组件的 computed 属性上；</li></ul><h3 id="Vuex-的-getter-特性"><a href="#Vuex-的-getter-特性" class="headerlink" title="Vuex 的 getter 特性"></a>Vuex 的 getter 特性</h3><ul><li>getter 对 state 进行计算操作，是 store 的计算属性；</li><li>组件可以有 getter 作为计算属性，getter 也可供多个组件复用；</li><li>如果一个状态仅用于一个组件，则可不需要 getter；</li></ul><h3 id="Vuex-的-mutation-特性"><a href="#Vuex-的-mutation-特性" class="headerlink" title="Vuex 的 mutation 特性"></a>Vuex 的 mutation 特性</h3><ul><li>执行的是同步操作；</li><li>是修改 state 的唯一途径；</li><li>可直接变更 state 状态；</li></ul><h3 id="Vuex-的-action-特性"><a href="#Vuex-的-action-特性" class="headerlink" title="Vuex 的 action 特性"></a>Vuex 的 action 特性</h3><ul><li>action 类似于 mutation，但提交的是 mutation，而不是直接修改 state；</li><li>可包含任意多个异步操作；</li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;生命周期函数&quot;&gt;&lt;a href=&quot;#生命周期函数&quot; class=&quot;headerlink&quot; title=&quot;生命周期函数&quot;&gt;&lt;/a&gt;生命周期函数&lt;/h2&gt;&lt;p&gt;8个周期阶段，分别为：创建前/后、载入前/后、更新前/后、销毁前/后。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;befor
-      
-    
-    </summary>
-    
-    
-    
-  </entry>
   
   <entry>
     <title>打造最佳终端环境</title>
@@ -151,6 +102,55 @@
       
       
         &lt;h2 id=&quot;深浅拷贝&quot;&gt;&lt;a href=&quot;#深浅拷贝&quot; class=&quot;headerlink&quot; title=&quot;深浅拷贝&quot;&gt;&lt;/a&gt;深浅拷贝&lt;/h2&gt;&lt;h3 id=&quot;浅拷贝&quot;&gt;&lt;a href=&quot;#浅拷贝&quot; class=&quot;headerlink&quot; title=&quot;浅拷贝&quot;&gt;&lt;/a&gt;浅拷
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>VueJS 一些概念</title>
+    <link href="https://h5m1007.github.io/2019/12/10/learn-from-vue/"/>
+    <id>https://h5m1007.github.io/2019/12/10/learn-from-vue/</id>
+    <published>2019-12-10T07:20:30.000Z</published>
+    <updated>2020-05-14T02:03:32.042Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="生命周期函数"><a href="#生命周期函数" class="headerlink" title="生命周期函数"></a>生命周期函数</h2><p>8个周期阶段，分别为：创建前/后、载入前/后、更新前/后、销毁前/后。</p><ul><li>beforeCreate: 还未有 Vue 实例的挂载对象 el；</li><li>created: 已有数据观测、属性/方法运算、watch/事件监听回调；</li><li>beforeMount: 已初始化 Vue 实例对象的 $el, data，还是虚拟 Dom 节点；</li><li>mounted: 已挂载 Vue 实例对象，虚拟 Dom 代替了文档的 el 位置；</li><li>beforeUpdate/updated: 当 data 发生变化，会调用 beforeUpdate/updated 两周期函数；</li><li>beforeDestroy/destroyed: 当调用 destroy 方法后，data 的变化不再调用所有的周期函数，此时的 Vue 已解除事件监听以及对 Dom 的绑定，但 Dom 结构依旧存在；</li></ul><h2 id="Vue-的优势"><a href="#Vue-的优势" class="headerlink" title="Vue 的优势"></a>Vue 的优势</h2><ul><li>低耦合：View 可独立于 Model 变化和修改，一个 ViewModel 可绑定到不同的 View 上，View 变化时 Model 可不变，Model 变化时 View 也可不变；</li><li>可重用性：可把一些视图逻辑写在 ViewModel，让更多地 View 去重用这些视图逻辑；</li><li>独立开发：开发者可更专注于业务逻辑和数据的开发；</li><li>可测试：针对 ViewModel 编写测试用例；</li></ul><h2 id="Vue-双向绑定原理"><a href="#Vue-双向绑定原理" class="headerlink" title="Vue 双向绑定原理"></a>Vue 双向绑定原理</h2><ul><li>VueJS采用数据劫持结合订阅者-发布者模式的方式，通过 <code>Object.definedProperty</code> 对各个属性的 <code>setter</code>、<code>getter</code> 进行代理劫持，当数据变动时，发布消息给订阅者，并触发相应的监听回调。</li></ul><h2 id="Vuex-的原理"><a href="#Vuex-的原理" class="headerlink" title="Vuex 的原理"></a>Vuex 的原理</h2><ul><li>Vuex 仅作为 Vue 的一个插件存在，不像 Redux 等状态管理库能用于其它框架之上，而 Vuex 只能在 Vue 上使用，最大程度上是因为其高度依赖于 Vue 的 Computed 依赖监测系统以及其插件系统。</li><li>Vuex 的思想诞生于 Flux，而其实现方式又完完全全使用 Vue 的响应式设计，依赖监听、收集都属于 Vue 对对象各个属性的代理劫持。</li><li>Vuex 的 store 其本质是没有 template 的隐藏着的 Vue 组件。</li></ul><h2 id="Vuex-核心属性"><a href="#Vuex-核心属性" class="headerlink" title="Vuex 核心属性"></a>Vuex 核心属性</h2><p>共同5个属性，分别为 state、getter、mutation、action、module。</p><h3 id="Vuex-的-store-特性"><a href="#Vuex-的-store-特性" class="headerlink" title="Vuex 的 store 特性"></a>Vuex 的 store 特性</h3><ul><li>store 如同一个仓库，里面有多个对象，其中 state 是数据源的存放地，类似于 Vue 对象的 data；</li><li>存放在 state 的数据是响应式的，一个组件往 store 取数据，store 里的数据一旦变化，依赖这数据的组件也会随之更新；</li><li>store 是通过 mapState 把 state 和 getters 映射到当前组件的 computed 属性上；</li></ul><h3 id="Vuex-的-getter-特性"><a href="#Vuex-的-getter-特性" class="headerlink" title="Vuex 的 getter 特性"></a>Vuex 的 getter 特性</h3><ul><li>getter 对 state 进行计算操作，是 store 的计算属性；</li><li>组件可以有 getter 作为计算属性，getter 也可供多个组件复用；</li><li>如果一个状态仅用于一个组件，则可不需要 getter；</li></ul><h3 id="Vuex-的-mutation-特性"><a href="#Vuex-的-mutation-特性" class="headerlink" title="Vuex 的 mutation 特性"></a>Vuex 的 mutation 特性</h3><ul><li>执行的是同步操作；</li><li>是修改 state 的唯一途径；</li><li>可直接变更 state 状态；</li></ul><h3 id="Vuex-的-action-特性"><a href="#Vuex-的-action-特性" class="headerlink" title="Vuex 的 action 特性"></a>Vuex 的 action 特性</h3><ul><li>action 类似于 mutation，但提交的是 mutation，而不是直接修改 state；</li><li>可包含任意多个异步操作；</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;生命周期函数&quot;&gt;&lt;a href=&quot;#生命周期函数&quot; class=&quot;headerlink&quot; title=&quot;生命周期函数&quot;&gt;&lt;/a&gt;生命周期函数&lt;/h2&gt;&lt;p&gt;8个周期阶段，分别为：创建前/后、载入前/后、更新前/后、销毁前/后。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;befor
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>React 一些概念</title>
+    <link href="https://h5m1007.github.io/2019/11/12/learn-from-react/"/>
+    <id>https://h5m1007.github.io/2019/11/12/learn-from-react/</id>
+    <published>2019-11-12T02:42:28.000Z</published>
+    <updated>2020-05-14T02:03:39.932Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="HOC"><a href="#HOC" class="headerlink" title="HOC"></a>HOC</h2><ul><li>一种模式，HOC本身为纯函数，没有任何副作用。</li></ul><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">withOperation</span>(<span class="params">wrappedComponent, <span class="regexp">/*els*/</span></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        &lt;wrappedComponent /&gt;</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ul><li>不要直接修改其传入的组件，内部使用并返回新的 class 包裹下传入的组件</li></ul><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">withOperation</span>(<span class="params">wrappedComponent</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="class"><span class="keyword">class</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">        render() &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">wrappedComponent</span> /&gt;</span></span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="React-memo"><a href="#React-memo" class="headerlink" title="React.memo"></a>React.memo</h2><ul><li>使用时机：当相同的 props 输入，得到相同的渲染结果时使用；</li><li>实现方式：通过记忆组件渲染结果的方式来提高组件的性能表现；</li><li>表现：跳过渲染组件的操作并直接复用最近一次渲染结果；</li></ul><h2 id="虚拟-Dom-vdom-提高性能"><a href="#虚拟-Dom-vdom-提高性能" class="headerlink" title="虚拟 Dom (vdom) 提高性能"></a>虚拟 Dom (vdom) 提高性能</h2><ul><li>vdom 相当于是 JS 与 真实 Dom 之间的一层缓存，利用 Dom Diff 算法规避了一些没必要的 Dom 操作，从而提高了性能；</li><li>用 JavaScript 对象结构来表示 Dom 树的结构，用这棵树来构建一个真正的 Dom 树，插入文档中。</li><li>当状态变更时，重新构建一棵新的对象树，对比新旧两课树的差异，记录差异构建真正的 Dom 树，从而更新视图；</li></ul><h2 id="Dom-Diff-原理"><a href="#Dom-Diff-原理" class="headerlink" title="Dom Diff 原理"></a>Dom Diff 原理</h2><ul><li>把树形结构按层级分解，只比较同级元素；</li><li>给列表结构的每个单元添加唯一的 key 属性，方便比较；</li><li>React 只匹配相同 Class 的 Component；</li><li>合并操作，当 Component 调用 setState 方法时，React 会标记为 Dirty，到每个事件循环结束后，React 会检查每个标记为 Dirty 的 Component，并重新绘制；</li><li>选择性子树渲染，开发者可重写 shouldComponentUpdate 来提高 Diff 性能；</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;HOC&quot;&gt;&lt;a href=&quot;#HOC&quot; class=&quot;headerlink&quot; title=&quot;HOC&quot;&gt;&lt;/a&gt;HOC&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;一种模式，HOC本身为纯函数，没有任何副作用。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&quot;highlight 
       
     
     </summary>
@@ -257,20 +257,19 @@
   </entry>
   
   <entry>
-    <title>dva</title>
+    <title>DvaJS 一些概念</title>
     <link href="https://h5m1007.github.io/2019/06/21/dva/"/>
     <id>https://h5m1007.github.io/2019/06/21/dva/</id>
     <published>2019-06-21T08:39:37.000Z</published>
-    <updated>2020-04-30T06:38:46.783Z</updated>
+    <updated>2020-05-13T03:39:16.478Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="DVA"><a href="#DVA" class="headerlink" title="DVA"></a>DVA</h1><hr><h3 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">├── /dist/                    <span class="comment"># 编译打包后目录</span></span><br><span class="line">├── /src/                     <span class="comment"># 源码目录</span></span><br><span class="line">│ ├── /assets/                <span class="comment"># 静态资源目录</span></span><br><span class="line">│ ├── /components/            <span class="comment"># UI组件目录</span></span><br><span class="line">│ │ ├── /Forbid/              <span class="comment"># 业务相关组件</span></span><br><span class="line">│ │ │ └── forbid.css          </span><br><span class="line">│ │ │ └── index.js            </span><br><span class="line">│ ├── /containers/            <span class="comment"># 容器组件目录</span></span><br><span class="line">│ │ └── Forbid.js             </span><br><span class="line">│ ├── /models/                <span class="comment"># Model 一个模块对应一个model</span></span><br><span class="line">│ ├── /services/              <span class="comment"># 各模块接口请求</span></span><br><span class="line">│ ├── /utils/                 <span class="comment"># 公用工具</span></span><br><span class="line">└── index.ejs                 </span><br><span class="line">└── index.js                  <span class="comment"># 入口文件</span></span><br><span class="line">└── router.js                 <span class="comment"># 路由文件</span></span><br></pre></td></tr></table></figure><h2 id="component"><a href="#component" class="headerlink" title="component"></a>component</h2><hr><p>UI组件，由开发者提供，负责UI视觉层；所有数据由props提供，不适用任何 <code>Redux</code> 的 API</p><h2 id="container"><a href="#container" class="headerlink" title="container"></a>container</h2><hr><p>容器组件，由 <code>react-redux</code> 自动生成，管理数据及业务逻辑，不负责UI实现；使用 <code>Redux</code> 的 API</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">const UiComponent &#x3D; (&#123;state, dispatch, location, history&#125;) &#x3D;&gt; ();</span><br><span class="line"></span><br><span class="line">const mapStateToProps &#x3D; (state, ownProps) &#x3D;&gt; state;</span><br><span class="line"></span><br><span class="line">const mapDispatchToProps &#x3D; (dispatch, ownProps) &#x3D;&gt; &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">        onAction: () &#x3D;&gt; &#123;</span><br><span class="line">            dispatch(&#123;</span><br><span class="line">                type: &#39;&#39;,</span><br><span class="line">                &#123;data&#125;</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">export connect(</span><br><span class="line">    mapStateToProps,</span><br><span class="line">    mapDispatchToProps</span><br><span class="line">)(UiComponent);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 经connect后的组件，可获取到state, dispatch, location, history</span><br></pre></td></tr></table></figure><h2 id="model"><a href="#model" class="headerlink" title="model"></a>model</h2><hr><p>dva最为重要的部分，可当做是对redux、react-redux、redux-saga的封装</p><h3 id="namespace"><a href="#namespace" class="headerlink" title="namespace"></a>namespace</h3><p>model的命名空间，全局state的一个属性，即state.namespace</p><h3 id="state"><a href="#state" class="headerlink" title="state"></a>state</h3><p>对应的是 <code>reducer</code> 的 <code>initialState</code></p><p><strong>额外说明</strong><br>react 的 state 和 redux 的 state 不是一个性质的东西，react 中的 state 是组件内部本身的状态，而 redux 的 state 则是 redux 本身的数据，提供给 react 使用，redux 也可提供给其它框架使用。</p><h3 id="subscription"><a href="#subscription" class="headerlink" title="subscription"></a>subscription</h3><p><em>dom ready后执行</em><br>订阅某些数据源，根据情况 <code>dispatch</code> 某些 <code>action</code></p><h3 id="effects"><a href="#effects" class="headerlink" title="effects"></a>effects</h3><p>对应的是 <code>redux-saga</code>，简化了使用方式<br>处理异步操作，发起异步action，<em>不能直接修改state</em><br>本身为对象，存放的只能是 <code>generator</code> 生成器函数，每个函数携带两个参数 <code>action</code> 和 <code>effects</code>，<br>而 <code>effects</code> 包含 <code>put</code>、<code>call</code>、<code>select</code> 三个字段，其中 <code>put</code> 触发 <code>action</code>，<code>call</code> 调用异步处理逻辑，<code>select</code> 从 <code>state</code> 中获取数据</p><h3 id="reducers"><a href="#reducers" class="headerlink" title="reducers"></a>reducers</h3><p>发起同步action<br><em>唯一可以修改state的地方</em><br>本身为对象，存放的每个函数都携带两个参数：<code>state</code> 和 <code>action</code></p>]]></content>
+    <content type="html"><![CDATA[<h2 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">├── /dist/                    <span class="comment"># 编译打包后目录</span></span><br><span class="line">├── /src/                     <span class="comment"># 源码目录</span></span><br><span class="line">│ ├── /assets/                <span class="comment"># 静态资源目录</span></span><br><span class="line">│ ├── /components/            <span class="comment"># UI组件目录</span></span><br><span class="line">│ │ ├── /Forbid/              <span class="comment"># 业务相关组件</span></span><br><span class="line">│ │ │ └── forbid.css</span><br><span class="line">│ │ │ └── index.js</span><br><span class="line">│ ├── /containers/            <span class="comment"># 容器组件目录</span></span><br><span class="line">│ │ └── Forbid.js</span><br><span class="line">│ ├── /models/                <span class="comment"># Model 一个模块对应一个model</span></span><br><span class="line">│ ├── /services/              <span class="comment"># 各模块接口请求</span></span><br><span class="line">│ ├── /utils/                 <span class="comment"># 公用工具</span></span><br><span class="line">└── index.ejs</span><br><span class="line">└── index.js                  <span class="comment"># 入口文件</span></span><br><span class="line">└── router.js                 <span class="comment"># 路由文件</span></span><br></pre></td></tr></table></figure><h2 id="component"><a href="#component" class="headerlink" title="component"></a>component</h2><hr><p>UI组件，由开发者提供，负责UI视觉层；所有数据由props提供，不适用任何 <code>Redux</code> 的 API</p><h2 id="container"><a href="#container" class="headerlink" title="container"></a>container</h2><hr><p>容器组件，由 <code>react-redux</code> 自动生成，管理数据及业务逻辑，不负责UI实现；使用 <code>Redux</code> 的 API</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> UiComponent = <span class="function">(<span class="params">&#123;state, dispatch, location, history&#125;</span>) =&gt;</span> ();</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> mapStateToProps = <span class="function">(<span class="params">state, ownProps</span>) =&gt;</span> state;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> mapDispatchToProps = <span class="function">(<span class="params">dispatch, ownProps</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        onAction: <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            dispatch(&#123;</span><br><span class="line">                type: <span class="string">''</span>,</span><br><span class="line">                &#123;data&#125;</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> connect(</span><br><span class="line">    mapStateToProps,</span><br><span class="line">    mapDispatchToProps</span><br><span class="line">)(UiComponent);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 经connect后的组件，可获取到state, dispatch, location, history</span></span><br></pre></td></tr></table></figure><h2 id="model"><a href="#model" class="headerlink" title="model"></a>model</h2><hr><p>dva最为重要的部分，可当做是对redux、react-redux、redux-saga的封装</p><h3 id="namespace"><a href="#namespace" class="headerlink" title="namespace"></a>namespace</h3><p>model的命名空间，全局state的一个属性，即state.namespace</p><h3 id="state"><a href="#state" class="headerlink" title="state"></a>state</h3><p>对应的是 <code>reducer</code> 的 <code>initialState</code></p><p><strong>额外说明</strong><br>react 的 state 和 redux 的 state 不是一个性质的东西，react 中的 state 是组件内部本身的状态，而 redux 的 state 则是 redux 本身的数据，提供给 react 使用，redux 也可提供给其它框架使用。</p><h3 id="subscription"><a href="#subscription" class="headerlink" title="subscription"></a>subscription</h3><p><em>dom ready后执行</em><br>订阅某些数据源，根据情况 <code>dispatch</code> 某些 <code>action</code></p><h3 id="effects"><a href="#effects" class="headerlink" title="effects"></a>effects</h3><p>对应的是 <code>redux-saga</code>，简化了使用方式<br>处理异步操作，发起异步action，<em>不能直接修改state</em><br>本身为对象，存放的只能是 <code>generator</code> 生成器函数，每个函数携带两个参数 <code>action</code> 和 <code>effects</code>，<br>而 <code>effects</code> 包含 <code>put</code>、<code>call</code>、<code>select</code> 三个字段，其中 <code>put</code> 触发 <code>action</code>，<code>call</code> 调用异步处理逻辑，<code>select</code> 从 <code>state</code> 中获取数据</p><h3 id="reducers"><a href="#reducers" class="headerlink" title="reducers"></a>reducers</h3><p>发起同步action<br><em>唯一可以修改state的地方</em><br>本身为对象，存放的每个函数都携带两个参数：<code>state</code> 和 <code>action</code></p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;h1 id=&quot;DVA&quot;&gt;&lt;a href=&quot;#DVA&quot; class=&quot;headerlink&quot; title=&quot;DVA&quot;&gt;&lt;/a&gt;DVA&lt;/h1&gt;&lt;hr&gt;
-&lt;h3 id=&quot;目录结构&quot;&gt;&lt;a href=&quot;#目录结构&quot; class=&quot;headerlink&quot; title=&quot;目录结构&quot;&gt;&lt;/
+        &lt;h2 id=&quot;目录结构&quot;&gt;&lt;a href=&quot;#目录结构&quot; class=&quot;headerlink&quot; title=&quot;目录结构&quot;&gt;&lt;/a&gt;目录结构&lt;/h2&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre
       
     
     </summary>
