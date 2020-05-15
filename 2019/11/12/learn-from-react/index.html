@@ -26,4 +26,21 @@
 <li>合并操作，当 Component 调用 setState 方法时，React 会标记为 Dirty，到每个事件循环结束后，React 会检查每个标记为 Dirty 的 Component，并重新绘制；</li>
 <li>选择性子树渲染，开发者可重写 shouldComponentUpdate 来提高 Diff 性能；</li>
 </ul>
+<h2 id="Redux"><a href="#Redux" class="headerlink" title="Redux"></a>Redux</h2><ul>
+<li>Redux<ul>
+<li>Store：存放数据如同一个容器，每个应用有且只有一个 Store；</li>
+<li>State：数据对象，在特定时间点对 Store 的数据生成快照，这样时间点下数据集合为 state；</li>
+<li>Action：用户访问 View，View 发起 Action，dispatch 接受 Action 传入 State，调用 Store 的 Reducer 对 State 操作，返回新的 State，View 更新；</li>
+<li>Reducer：接收 Action 及 State 做为参数传入，处理 State 并返回新的 State；</li>
+<li>Dispatch：View 只能通过 Dispatch 派发 Action；</li>
+</ul>
+</li>
+<li>react-redux<ul>
+<li>Provider：封装整个应用，通过 Connect 模块传递 Store；</li>
+<li>Connect：1. 连接 React 与 Redux，通过 Provider 提供的 Store，store.getState() 来获取 Store Tree 的 state；2. 包装原组件，以 Props 方式传入原组件内部，传入 mapStateToProps/mapDispatchToProps 与原有的 Props 合并；3. 监听 Store Tree 的变换，判断更新前后的 State，是否调用了 <code>this.setState()</code>，从而重渲染；</li>
+<li>mapStateToProps：订阅 Store 的更新；</li>
+<li>mapDispatchToProps：改变 Store；</li>
+</ul>
+</li>
+</ul>
 </div></article></div></main><footer><div class="paginator"><a href="/2019/12/10/learn-from-vue/" class="prev">PREV</a><a href="/2019/06/27/knowledge-combing/" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2020 <a href="https://h5m1007.github.io">Leon</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>
