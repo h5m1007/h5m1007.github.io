@@ -5,7 +5,7 @@
 <li>created: 已有数据观测、属性/方法运算、watch/事件监听回调；</li>
 <li>beforeMount: 已初始化 Vue 实例对象的 $el, data，还是虚拟 Dom 节点；</li>
 <li>mounted: 已挂载 Vue 实例对象，虚拟 Dom 代替了文档的 el 位置；</li>
-<li>beforeUpdate/updated: 当 data 发生变化，会调用 beforeUpdate/updated 两周期函数；</li>
+<li>beforeUpdate/updated: 当 data 发生变化，会调用 beforeUpdate/updated 两个周期函数；</li>
 <li>beforeDestroy/destroyed: 当调用 destroy 方法后，data 的变化不再调用所有的周期函数，此时的 Vue 已解除事件监听以及对 Dom 的绑定，但 Dom 结构依旧存在；</li>
 </ul>
 <h2 id="Vue-的优势"><a href="#Vue-的优势" class="headerlink" title="Vue 的优势"></a>Vue 的优势</h2><ul>
@@ -15,7 +15,7 @@
 <li>可测试：针对 ViewModel 编写测试用例；</li>
 </ul>
 <h2 id="Vue-双向绑定原理"><a href="#Vue-双向绑定原理" class="headerlink" title="Vue 双向绑定原理"></a>Vue 双向绑定原理</h2><ul>
-<li>VueJS采用数据劫持结合订阅者-发布者模式的方式，通过 <code>Object.definedProperty</code> 对各个属性的 <code>setter</code>、<code>getter</code> 进行代理劫持，当数据变动时，发布消息给订阅者，并触发相应的监听回调。</li>
+<li>VueJS采用数据劫持结合订阅者-发布者模式的方式，通过 <code>Object.definedProperty</code> 对对象各个属性的 <code>setter</code>、<code>getter</code> 进行代理劫持，当数据变动时，发布消息给订阅者，并触发相应的监听回调。</li>
 </ul>
 <h2 id="Vuex-的原理"><a href="#Vuex-的原理" class="headerlink" title="Vuex 的原理"></a>Vuex 的原理</h2><ul>
 <li>Vuex 仅作为 Vue 的一个插件存在，不像 Redux 等状态管理库能用于其它框架之上，而 Vuex 只能在 Vue 上使用，最大程度上是因为其高度依赖于 Vue 的 Computed 依赖监测系统以及其插件系统。</li>
@@ -42,4 +42,4 @@
 <li>action 类似于 mutation，但提交的是 mutation，而不是直接修改 state；</li>
 <li>可包含任意多个异步操作；</li>
 </ul>
-</div></article></div></main><footer><div class="paginator"><a href="/2019/06/12/learn-from-react/" class="prev">上一篇</a><a href="/2018/10/15/node_support_es6/" class="next">下一篇</a></div><div class="copyright"><p>© 2015 - 2020 <a href="https://h5m1007.github.io">Leon</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>
+</div></article></div></main><footer><div class="paginator"><a href="/2019/06/12/learn-from-react/" class="prev">PREV</a><a href="/2018/10/15/node_support_es6/" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2020 <a href="https://h5m1007.github.io">Leon</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>
