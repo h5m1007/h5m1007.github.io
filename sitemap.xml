@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://h5m1007.github.io/2019/06/12/learn-from-react/</loc>
+    
+    <lastmod>2020-05-25T09:48:37.971Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://h5m1007.github.io/2020/04/09/learn-from-js/</loc>
     
     <lastmod>2020-05-19T02:43:42.503Z</lastmod>
@@ -12,13 +19,6 @@
     <loc>https://h5m1007.github.io/2019/06/10/learn-from-vue/</loc>
     
     <lastmod>2020-05-18T03:28:22.560Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://h5m1007.github.io/2019/06/12/learn-from-react/</loc>
-    
-    <lastmod>2020-05-18T02:54:54.153Z</lastmod>
     
   </url>
   

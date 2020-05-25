@@ -17,7 +17,7 @@
 <h2 id="虚拟-Dom-vdom-提高性能"><a href="#虚拟-Dom-vdom-提高性能" class="headerlink" title="虚拟 Dom (vdom) 提高性能"></a>虚拟 Dom (vdom) 提高性能</h2><ul>
 <li>vdom 相当于是 JS 与 真实 Dom 之间的一层缓存，利用 Dom Diff 算法规避了一些没必要的 Dom 操作，从而提高了性能；</li>
 <li>用 JavaScript 对象结构来表示 Dom 树的结构，用这棵树来构建一个真正的 Dom 树，插入文档中。</li>
-<li>当状态变更时，重新构建一棵新的对象树，对比新旧两课树的差异，记录差异构建真正的 Dom 树，从而更新视图；</li>
+<li>当状态变更时，重新构建一棵新的对象树，对比新旧两棵树的差异，记录差异构建真正的 Dom 树，从而更新视图；</li>
 </ul>
 <h2 id="Dom-Diff-原理"><a href="#Dom-Diff-原理" class="headerlink" title="Dom Diff 原理"></a>Dom Diff 原理</h2><ul>
 <li>把树形结构按层级分解，只比较同级元素；</li>
