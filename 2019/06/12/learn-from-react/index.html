@@ -21,7 +21,7 @@
 </ul>
 <h2 id="Dom-Diff-原理"><a href="#Dom-Diff-原理" class="headerlink" title="Dom Diff 原理"></a>Dom Diff 原理</h2><ul>
 <li>把树形结构按层级分解，只比较同级元素；</li>
-<li>给列表结构的每个单元添加唯一的 key 属性，方便比较；</li>
+<li>给列表结构的每个单元添加唯一的 key 属性，方便比较；<br>  diff 通过对比节点的 tag 和 key 是否为同一节点<br>  减少渲染次数，提高性能</li>
 <li>React 只匹配相同 Class 的 Component；</li>
 <li>合并操作，当 Component 调用 setState 方法时，React 会标记为 Dirty，到每个事件循环结束后，React 会检查每个标记为 Dirty 的 Component，并重新绘制；</li>
 <li>选择性子树渲染，开发者可重写 shouldComponentUpdate 来提高 Diff 性能；</li>
