@@ -24,7 +24,7 @@
 <li>给列表结构的每个单元添加唯一的 key 属性，方便比较；<br>  diff 通过对比节点的 tag 和 key 是否为同一节点<br>  减少渲染次数，提高性能</li>
 <li>React 只匹配相同 Class 的 Component；</li>
 <li>合并操作，当 Component 调用 setState 方法时，React 会标记为 Dirty，到每个事件循环结束后，React 会检查每个标记为 Dirty 的 Component，并重新绘制；</li>
-<li>选择性子树渲染，开发者可重写 shouldComponentUpdate 来提高 Diff 性能；</li>
+<li>选择性子树渲染，开发者可重写 shouldComponentUpdate 来提高 Diff 性能；<br>  当状态变更时，整个组件树都会发生重渲染，重定义 shouldComponentUpdate 的判断，可避免没必要的渲染<br>  采用 PureComponent、React.memo 隐式实现浅比较的 shouldComponentUpdate</li>
 </ul>
 <h2 id="Redux"><a href="#Redux" class="headerlink" title="Redux"></a>Redux</h2><ul>
 <li>Redux<ul>
@@ -43,4 +43,4 @@
 </ul>
 </li>
 </ul>
-</div></article></div></main><footer><div class="paginator"><a href="/2019/06/21/docker/" class="prev">上一篇</a><a href="/2019/06/10/learn-from-vue/" class="next">下一篇</a></div><div class="copyright"><p>© 2015 - 2020 <a href="https://h5m1007.github.io">Leon</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>
+</div></article></div></main><footer><div class="paginator"><a href="/2019/06/21/docker/" class="prev">PREV</a><a href="/2019/06/10/learn-from-vue/" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2020 <a href="https://h5m1007.github.io">Leon</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>
