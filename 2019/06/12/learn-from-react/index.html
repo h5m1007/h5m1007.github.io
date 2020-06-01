@@ -43,4 +43,15 @@
 </ul>
 </li>
 </ul>
+<h2 id="React-v16-更新点"><a href="#React-v16-更新点" class="headerlink" title="React v16 更新点"></a>React v16 更新点</h2><ul>
+<li><p>生命周期</p>
+<p>  getDerivedStateFromProps / getSnapshotBeforeUpdate 取代原有的 componentWillMount / componentWillReceiveProps / componentWillUpdate</p>
+<p>  <img src="https://i.loli.net/2020/05/31/sneH236F7AKziXb.png" alt="生命周期图"></p>
+<p>  究其原因是引入了<strong>异步渲染机制</strong>，即在渲染完成前可中断任务，中断后不会继续执行生命周期，而是重头开始执行。被取代这三个生命周期可能会被中断导致执行多次，产生意想不到的情况。</p>
+<p>  而在 react v16 前的版本，渲染是同步的，会把所有操作累加起来，统计对比所有变化后，统一更新一次 DOM 树，遇到组件深层级，渲染更新一旦开始无法停止，导致主线程长时间占用，这也是 react 在动画、布局、手势等区域会造成掉帧、延迟响应。</p>
+</li>
+<li><p>Fiber</p>
+<p>  把渲染任务分块并分散至多个帧中。</p>
+</li>
+</ul>
 </div></article></div></main><footer><div class="paginator"><a href="/2019/06/21/docker/" class="prev">上一篇</a><a href="/2019/06/10/learn-from-vue/" class="next">下一篇</a></div><div class="copyright"><p>© 2015 - 2020 <a href="https://h5m1007.github.io">Leon</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>
